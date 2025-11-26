@@ -171,7 +171,7 @@ const CONFIGS = {
         }],
         "@stylistic/quotes": ["error", "double", {
           avoidEscape: true,
-          allowTemplateLiterals: true,
+          allowTemplateLiterals: "always",
         }],
         "@stylistic/semi": ["error", "never"],
         "@stylistic/space-before-function-paren": ["error", "never"],
