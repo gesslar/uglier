@@ -1,6 +1,6 @@
 {
   "name": "@gesslar/uglier",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Composable ESLint flat config blocks for stylistic, JSDoc, and environment presets.",
   "type": "module",
   "main": "src/uglier.js",
