@@ -1,12 +1,16 @@
 {
   "name": "@gesslar/uglier",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Composable ESLint flat config blocks for stylistic, JSDoc, and environment presets.",
   "type": "module",
   "main": "src/uglier.js",
   "exports": "./src/uglier.js",
+  "bin": {
+    "uglier": "./bin/install.js"
+  },
   "files": [
-    "src"
+    "src",
+    "bin"
   ],
   "keywords": [
     "eslint",
@@ -33,5 +37,10 @@
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.4.0",
     "globals": "^16.5.0"
+  },
+  "devDependencies": {
+    "@gesslar/colours": "^0.0.1",
+    "@gesslar/toolkit": "^0.8.0",
+    "@gesslar/uglier": "^0.0.1"
   }
 }
