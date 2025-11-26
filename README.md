@@ -30,8 +30,36 @@ kthx
 
 ## Install
 
+### Quick Install (Recommended)
+
+The easiest way to install `@gesslar/uglier` and all its dependencies:
+
 ```sh
-npm install --save-dev @gesslar/uglier
+npx @gesslar/uglier
+```
+
+This will automatically install:
+
+- `@gesslar/uglier`
+- `eslint` (if not already installed)
+- `@stylistic/eslint-plugin`
+- `eslint-plugin-jsdoc`
+- `globals`
+
+### Manual Install
+
+If you prefer to install manually:
+
+```sh
+npm install --save-dev @gesslar/uglier eslint @stylistic/eslint-plugin eslint-plugin-jsdoc globals
+```
+
+### View Available Configs
+
+To see all available config blocks:
+
+```sh
+npx @gesslar/uglier --help
 ```
 
 ## Usage
