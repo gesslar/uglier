@@ -1,9 +1,8 @@
 # @gesslar/uglier
 
-Composable ESLint flat config blocks you can mix and match for stylistic
-linting, JSDoc enforcement, and environment presets.
+**Opinionated, composable ESLint flat config for people who like their code readable.**
 
-Uses [ESLint's flat config format](https://eslint.org/docs/latest/use/configure/configuration-files).
+A flexible ESLint configuration system built on [flat config](https://eslint.org/docs/latest/use/configure/configuration-files) that lets you mix and match stylistic rules, JSDoc enforcement, and environment presets.
 
 ## Monotribe
 
@@ -28,87 +27,78 @@ kthx
 
 \[cat.gif\]
 
-## Install
+## Quick Start
 
-### Quick Install (Recommended)
+```bash
+# Install and set up in one command
+npx @gesslar/uglier init node
 
-The easiest way to install `@gesslar/uglier` and all its dependencies:
+# Or for React projects
+npx @gesslar/uglier init react
 
-```sh
+# Or just install without config generation
 npx @gesslar/uglier
 ```
 
-This will automatically install:
-
-- `@gesslar/uglier`
-- `eslint` (if not already installed)
-- `@stylistic/eslint-plugin`
-- `eslint-plugin-jsdoc`
-- `globals`
-
-### Manual Install
-
-If you prefer to install manually:
-
-```sh
-npm install --save-dev @gesslar/uglier eslint @stylistic/eslint-plugin eslint-plugin-jsdoc globals
-```
-
-### View Available Configs
-
-To see all available config blocks:
-
-```sh
-npx @gesslar/uglier --help
-```
+This automatically installs `@gesslar/uglier`, `eslint`, and all dependencies.
 
 ## Usage
 
-### Basic Setup
+### Generated Config
+
+Running `init` creates an `eslint.config.js` with helpful comments:
 
 ```js
-// eslint.config.js
 import uglify from "@gesslar/uglier"
 
 export default [
   ...uglify({
-    with: ["lints-js", "lints-jsdoc"]
+    with: [
+      "lints-js",      // default files: ["**/*.{js,mjs,cjs}"]
+      "lints-jsdoc",   // default files: ["**/*.{js,mjs,cjs}"]
+      "node",          // default files: ["**/*.{js,mjs,cjs}"]
+    ]
   })
 ]
 ```
 
-### Excluding Configs
+### Common Scenarios
 
-Use `without` to exclude specific configs:
+#### Node.js Project
 
 ```js
 export default [
   ...uglify({
-    with: ["lints-js", "lints-jsdoc", "node"],
-    without: ["lints-jsdoc"]  // Remove JSDoc rules
+    with: ["lints-js", "node"]
   })
 ]
 ```
 
-### Customizing File Patterns
-
-Override file patterns for specific configs:
+#### React Project
 
 ```js
 export default [
   ...uglify({
-    with: ["lints-js", "lints-jsdoc", "tauri"],
+    with: ["lints-js", "react"]
+  })
+]
+```
+
+#### Monorepo (Node + Web)
+
+```js
+export default [
+  ...uglify({
+    with: ["lints-js", "node", "web"],
     overrides: {
-      "lints-js": { files: ["src/**/*.js"] },
-      "tauri": { files: ["src/**/*.js"] }
+      "node": { files: ["server/**/*.js"] },
+      "web": { files: ["client/**/*.js"] }
     }
   })
 ]
 ```
 
-### Customizing Style Rules
-
-Override indent, maxLen, or specific rules:
+#### Custom Style Preferences
 
 ```js
 export default [
@@ -116,8 +106,8 @@ export default [
     with: ["lints-js"],
     overrides: {
       "lints-js": {
-        indent: 4,                    // Default: 2
-        maxLen: 120,                  // Default: 80
+        indent: 4,           // default: 2
+        maxLen: 120,         // default: 80
         overrides: {
           "@stylistic/semi": ["error", "always"]
         }
@@ -127,36 +117,77 @@ export default [
 ]
 ```
 
-## Available Configs
-
-### Linting
-
-- **`lints-js`** - Core stylistic rules (indent, spacing, quotes, etc.)
-- **`lints-jsdoc`** - JSDoc documentation requirements
-
-### Language
-
-- **`languageOptions`** - Base ECMAScript language configuration
-
-### Environments
-
-- **`web`** - Browser globals (window, document, etc.)
-- **`node`** - Node.js globals (process, require, fetch, Headers)
-- **`tauri`** - Tauri app globals (browser + `__TAURI__`)
-- **`vscode-extension`** - VSCode extension API (acquireVsCodeApi)
-
-### Module Overrides
-
-- **`cjs-override`** - CommonJS file handling (.cjs files)
-- **`mjs-override`** - ES Module file handling (.mjs files)
-
-You can also access the config names programmatically:
+#### Exclude JSDoc Requirements
 
 ```js
-import {availableConfigs} from "@gesslar/uglier"
-console.log(availableConfigs)
+export default [
+  ...uglify({
+    with: ["lints-js", "lints-jsdoc", "node"],
+    without: ["lints-jsdoc"]
+  })
+]
 ```
+
+## Available Configs
+
+### Linting Rules
+
+- **`lints-js`** - Stylistic rules (indent, spacing, quotes, braces, etc.)
+- **`lints-jsdoc`** - JSDoc documentation requirements
+
+### Environment Targets
+
+- **`node`** - Node.js globals (process, Buffer, etc.)
+- **`web`** - Browser globals (window, document, etc.)
+- **`react`** - React environment (browser + React/ReactDOM)
+- **`tauri`** - Tauri apps (browser + `__TAURI__` APIs)
+- **`vscode-extension`** - VSCode extension API
+
+### Utilities
+
+- **`languageOptions`** - ECMAScript language settings
+- **`cjs-override`** - CommonJS file handling (`.cjs`)
+- **`mjs-override`** - ES Module file handling (`.mjs`)
+
+Run `npx @gesslar/uglier --help` to see all available configs with descriptions.
+
+## Commands
+
+```bash
+# Install dependencies only
+npx @gesslar/uglier
+
+# Generate config for specific targets
+npx @gesslar/uglier init node
+npx @gesslar/uglier init web
+npx @gesslar/uglier init react
+npx @gesslar/uglier init node web  # Multiple targets
+
+# Show available configs
+npx @gesslar/uglier --help
+```
+
+## Manual Installation
+
+If you prefer manual control:
+
+```bash
+npm install --save-dev @gesslar/uglier eslint
+```
+
+Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
+
+## Philosophy
+
+This config enforces:
+
+- **Readable spacing** - Blank lines between control structures
+- **Consistent style** - Double quotes, no semicolons, 2-space indent
+- **Flexible customization** - Override anything via the `overrides` option
+- **Composability** - Mix configs for different file patterns in the same project
+
+It's opinionated, but you can override any rule. The defaults just happen to be correct. 😉
 
 ## License
 
-[Unlicense](UNLICENSE.txt) - "Because you're worth it." (- someone. maybe? idfk)
+[Unlicense](https://unlicense.org/) - Public domain. Do whatever you want.

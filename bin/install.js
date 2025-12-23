@@ -1,16 +1,24 @@
 #!/usr/bin/env node
 
 /**
- * @file install.js - Auto-installer for @gesslar/uglier
+ * @file install.js - Auto-installer and config generator for @gesslar/uglier
  *
  * @description
  * This script can be run via `npx @gesslar/uglier` to automatically install
- * the package and all its dependencies to the current project.
+ * the package and its peer dependencies to the current project.
  *
- * It will:
+ * Commands:
+ * - npx @gesslar/uglier           - Install package and dependencies
+ * - npx @gesslar/uglier init      - Generate eslint.config.js with prompts
+ * - npx @gesslar/uglier init node - Generate eslint.config.js for Node.js
+ * - npx @gesslar/uglier --help    - Show help
+ *
+ * Installation does:
  * 1. Install @gesslar/uglier as a dev dependency
  * 2. Install eslint as a peer dependency (if not present)
- * 3. Install all required plugins as dev dependencies
+ *
+ * Note: All other dependencies (@stylistic/eslint-plugin, eslint-plugin-jsdoc, globals)
+ * are bundled with the package and don't need to be installed separately.
  */
 
 import {execSync} from "child_process"
@@ -24,13 +32,8 @@ const __dirname = dirname(__filename)
 
 const PACKAGE_NAME = "@gesslar/uglier"
 
-// Dependencies that need to be installed
-const REQUIRED_DEPS = [
-  "@stylistic/eslint-plugin",
-  "eslint-plugin-jsdoc",
-  "globals"
-]
-
+// Only peer dependencies need to be installed separately
+// (all other dependencies come bundled with the package)
 const PEER_DEPS = [
   "eslint"
 ]
@@ -52,7 +55,7 @@ function exec(cmd) {
 
 /**
  * Get available configs from the source file
- * @returns {Promise<Array<{name: string, description: string}>|null>} Available configs
+ * @returns {Promise<Array<{name: string, description: string, files: string}>|null>} Available configs
  */
 async function getAvailableConfigs() {
   try {
@@ -77,16 +80,17 @@ async function getAvailableConfigs() {
 
     const source = await uglierFile.read()
 
-    // Extract config names and their JSDoc descriptions
+    // Extract config names, descriptions, and default files
     const configs = []
     // Match individual config blocks within CONFIGS object
-    const configBlockRegex = /\/\*\*\s*\n\s*\*\s*([^\n@*]+?)\s*\n(?:\s*\*[^\n]*\n)*?\s*\*\/\s*\n\s*["']([^"']+)["']:\s*\([^)]*\)\s*=>/g
+    const configBlockRegex = /\/\*\*\s*\n\s*\*\s*([^\n@*]+?)\s*\n(?:\s*\*[^\n]*\n)*?\s*\*\/\s*\n\s*["']([^"']+)["']:\s*\([^)]*\)\s*=>\s*\{[^}]*?files\s*=\s*(\[[^\]]+\])/g
     let match
 
     while((match = configBlockRegex.exec(source)) !== null) {
       configs.push({
         name: match[2],
-        description: match[1].trim()
+        description: match[1].trim(),
+        files: match[3]
       })
     }
 
@@ -105,8 +109,10 @@ async function showHelp() {
   console.log()
   console.log("Usage:")
   console.log()
-  console.log(c`  {<B}npx @gesslar/uglier{B>}          Install package and dependencies`)
-  console.log(c`  {<B}npx @gesslar/uglier --help{B>}   Show this help`)
+  console.log(c`  {<B}npx @gesslar/uglier{B>}                Install package and dependencies`)
+  console.log(c`  {<B}npx @gesslar/uglier init{B>}           Generate eslint.config.js interactively`)
+  console.log(c`  {<B}npx @gesslar/uglier init <targets>{B>} Generate eslint.config.js with targets`)
+  console.log(c`  {<B}npx @gesslar/uglier --help{B>}         Show this help`)
   console.log()
 
   const configs = await getAvailableConfigs()
@@ -178,18 +184,9 @@ async function install() {
     }
   }
 
-  // Check required dependencies
-  for(const dep of REQUIRED_DEPS) {
-    if(!(await isInstalled(dep))) {
-      toInstall.push(dep)
-    } else {
-      console.log(c`{F070}✓{/} {<B}${dep}{B>} already installed`)
-    }
-  }
-
   // Install missing packages
   if(toInstall.length > 0) {
-    console.log(c`\n{F027} Installing:{/} ${toInstall.map(p => c`{F172}${p}{/}`).join(", ")}\n`)
+    console.log(c`\n{F027} Installing:{/} ${toInstall.map(p => c`{F172}${p}{/}`).join(", ")}`)
 
     const installCmd = `npm install -D ${toInstall.join(" ")}`
 
@@ -205,11 +202,104 @@ async function install() {
   console.log(c`https://github.com/gesslar/uglier#readme`)
 }
 
+/**
+ * Generate eslint.config.js file
+ * @param {string[]} targets - Target environments (node, web, react, etc.)
+ */
+async function generateConfig(targets = []) {
+  const configFile = new FileObject("eslint.config.js", process.cwd())
+
+  if(await configFile.exists) {
+    console.log(c`{F214}Warning:{/} {<B}eslint.config.js{B>} already exists`)
+    console.log(c`Delete it first or edit it manually`)
+
+    return
+  }
+
+  // Get available configs dynamically
+  const configs = await getAvailableConfigs()
+  const environmentTargets = configs
+    ? configs.filter(c => !c.name.startsWith("lints-") && c.name !== "languageOptions" && !c.name.endsWith("-override"))
+      .map(c => c.name)
+    : ["node", "web", "react", "tauri", "vscode-extension"]
+
+  // If no targets specified, make it interactive
+  if(targets.length === 0) {
+    console.log(c`{F027}Choose your target environments:{/}`)
+    console.log()
+    console.log(c`Available targets: ${environmentTargets.map(t => c`{F172}${t}{/}`).join(", ")}`)
+    console.log()
+    console.log(c`{F244}Example: npx @gesslar/uglier init ${environmentTargets[0] || "node"}{/}`)
+
+    return
+  }
+
+  // Validate targets
+  const validTargets = environmentTargets
+  const invalidTargets = targets.filter(t => !validTargets.includes(t))
+
+  if(invalidTargets.length > 0) {
+    console.log(c`{F214}Error:{/} Invalid targets: {F172}${invalidTargets.join(", ")}{/}`)
+    console.log(c`Valid targets: {F070}${validTargets.join(", ")}{/}`)
+
+    return
+  }
+
+  // Build the config with comments
+  const withArray = ["lints-js", "lints-jsdoc", ...targets]
+
+  // Get file patterns dynamically from source
+  const allConfigs = await getAvailableConfigs()
+  const filePatterns = {}
+
+  if(allConfigs) {
+    for(const config of allConfigs) {
+      filePatterns[config.name] = config.files
+    }
+  }
+
+  // Build the with array with comments
+  const withLines = withArray.map(target => {
+    const pattern = filePatterns[target] || "[]"
+
+    return `      "${target}", // default files: ${pattern}`
+  }).join("\n")
+
+  const configContent = `import uglify from "@gesslar/uglier"
+
+export default [
+  ...uglify({
+    with: [
+${withLines}
+    ]
+  })
+]
+`
+
+  await configFile.write(configContent)
+
+  console.log(c`{F070}✓{/} Created {<B}eslint.config.js{B>}`)
+  console.log()
+  console.log(c`{F039}Configuration includes:{/}`)
+
+  for(const target of withArray) {
+    console.log(c`  {F070}•{/} ${target}`)
+  }
+
+  console.log()
+  console.log(c`{F244}Run {<B}npx eslint .{B>} to lint your project{/}`)
+}
+
 // Parse command line arguments and run
 const args = process.argv.slice(2)
 
 if(args.includes("--help") || args.includes("-h")) {
   await showHelp()
+} else if(args[0] === "init") {
+  const targets = args.slice(1)
+
+  await install()
+  await generateConfig(targets)
 } else {
   await install()
 }
