@@ -177,65 +177,6 @@ npm install --save-dev @gesslar/uglier eslint
 
 Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
 
-## Advanced Integration
-
-### ServiceNow Projects
-
-ServiceNow development requires special handling because your code runs in two environments: the ServiceNow SDK tools use Node.js, but your application code runs on the ServiceNow Rhino engine (which doesn't support Node APIs).
-
-The `@servicenow/eslint-plugin-sdk-app-plugin` uses the legacy `.eslintrc` format. To integrate it with `uglier`, you'll need the `FlatCompat` compatibility layer.
-
-```bash
-npm install --save-dev @eslint/eslintrc @servicenow/eslint-plugin-sdk-app-plugin
-```
-
-```js
-import uglify from "@gesslar/uglier"
-import {FlatCompat} from "@eslint/eslintrc"
-import path from "path"
-import {fileURLToPath} from "url"
-import serviceNowPlugin from "@servicenow/eslint-plugin-sdk-app-plugin"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({baseDirectory: __dirname})
-
-export default [
-  ...uglify({
-    with: ["lints-js"],
-    overrides: {
-      "lints-js": {files: ["src/**/*.js"]}
-    }
-  }),
-  {
-    files: ["src/**/*.js"],
-    plugins: {"@servicenow/sdk-app-plugin": serviceNowPlugin}
-  },
-  ...compat.extends("plugin:@servicenow/sdk-app-plugin/recommended")
-]
-```
-
-The `FlatCompat` layer bridges legacy plugins into flat config. When ServiceNow releases a flat config version of their plugin, you can drop the compatibility layer and use it directly.
-
-### Other Legacy Plugins
-
-Many enterprise plugins haven't migrated to flat config yet. Use the same `FlatCompat` pattern:
-
-```js
-import {FlatCompat} from "@eslint/eslintrc"
-import path from "path"
-import {fileURLToPath} from "url"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({baseDirectory: __dirname})
-
-export default [
-  ...uglify({with: ["lints-js", "node"]}),
-  ...compat.extends("plugin:legacy-plugin/recommended")
-]
-```
-
 ## Philosophy
 
 This config enforces:
