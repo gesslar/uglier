@@ -66,6 +66,7 @@
  * - languageOptions: Base ECMAScript language configuration
  * - web: Browser globals (window, document, etc.)
  * - node: Node.js globals (process, require, fetch, Headers)
+ * - react: React globals (browser + React, ReactDOM)
  * - tauri: Tauri app globals (browser + __TAURI__)
  * - vscode-extension: VSCode extension API (acquireVsCodeApi)
  * - cjs-override: CommonJS file handling (.cjs files)
@@ -311,6 +312,31 @@ const CONFIGS = {
           ...globals.node,
           fetch: "readonly",
           Headers: "readonly",
+          ...additionalGlobals,
+        }
+      }
+    }
+  },
+
+  /**
+   * React application globals
+   * @param {object} options - Configuration options
+   * @returns {object} Config object
+   */
+  "react": (options = {}) => {
+    const {
+      files = ["src/**/*.{js,jsx,mjs,cjs}"],
+      additionalGlobals = {},
+    } = options
+
+    return {
+      name: "gesslar/uglier/react",
+      files: Array.isArray(files) ? files : [files],
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+          React: "readonly",
+          ReactDOM: "readonly",
           ...additionalGlobals,
         }
       }
