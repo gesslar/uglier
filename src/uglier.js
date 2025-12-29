@@ -60,7 +60,8 @@
  *   })
  * ]
  *
- * @available-configs
+ * available-configs
+ *
  * - lints-js: Core stylistic rules (indent, spacing, quotes, etc.)
  * - lints-jsdoc: JSDoc documentation requirements
  * - languageOptions: Base ECMAScript language configuration
@@ -80,11 +81,13 @@ import globals from "globals"
 /**
  * Registry of named configuration blocks
  * Each config is a factory function that returns an ESLint config object
- * @type {Object.<string, Function>}
+ *
+ * @type {{[key: string]: Function}}
  */
 const CONFIGS = {
   /**
    * Core stylistic linting rules
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -197,6 +200,7 @@ const CONFIGS = {
 
   /**
    * JSDoc linting rules
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -227,6 +231,7 @@ const CONFIGS = {
 
   /**
    * Language options configuration
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -249,6 +254,7 @@ const CONFIGS = {
 
   /**
    * Browser/web globals configuration
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -272,6 +278,7 @@ const CONFIGS = {
 
   /**
    * VSCode extension globals
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -295,6 +302,7 @@ const CONFIGS = {
 
   /**
    * Node.js globals
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -320,6 +328,7 @@ const CONFIGS = {
 
   /**
    * React application globals
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -345,6 +354,7 @@ const CONFIGS = {
 
   /**
    * CommonJS file override
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -365,6 +375,7 @@ const CONFIGS = {
 
   /**
    * ES Module file override
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -385,6 +396,7 @@ const CONFIGS = {
 
   /**
    * Tauri application configuration (browser + Tauri APIs, no Node.js)
+   *
    * @param {object} options - Configuration options
    * @returns {object} Config object
    */
@@ -411,6 +423,7 @@ const CONFIGS = {
 
 /**
  * Compose ESLint configuration from named config blocks
+ *
  * @param {object} options - Composition options
  * @param {string[]} options.with - Config names to include
  * @param {string[]} options.without - Config names to exclude (higher precedence)
