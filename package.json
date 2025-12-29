@@ -1,13 +1,19 @@
 {
   "name": "@gesslar/uglier",
-  "version": "0.0.8",
   "description": "Composable ESLint flat config blocks for stylistic, JSDoc, and environment presets.",
+  "author": "gesslar",
+  "version": "0.0.9",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gesslar/uglier.git"
+  },
   "type": "module",
   "main": "src/uglier.js",
   "exports": "./src/uglier.js",
   "bin": {
     "uglier": "./bin/install.js"
   },
+  "packageManager": "pnpm@10.26.2",
   "files": [
     "src",
     "bin"
@@ -25,9 +31,11 @@
     "cat.gif"
   ],
   "scripts": {
-    "submit": "npm login && npm publish --access public",
-    "update": "npx npm-check-updates -u && npm install",
-    "pr": "gt submit --publish --restack --ai"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "update": "pnpm up -L",
+    "submit": "pnpm publish --access public --//registry.npmjs.org/:_authToken=\"${NPM_ACCESS_TOKEN}\"",
+    "pr": "gt submit -p --ai"
   },
   "license": "Unlicense",
   "peerDependencies": {
@@ -35,12 +43,13 @@
   },
   "dependencies": {
     "@gesslar/colours": "^0.0.1",
-    "@gesslar/toolkit": "^1.10.0",
+    "@gesslar/toolkit": "^3.0.1",
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.5.0",
     "globals": "^16.5.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": "^0.0.6"
+    "@gesslar/uglier": "^0.0.8",
+    "eslint": "^9.39.2"
   }
 }

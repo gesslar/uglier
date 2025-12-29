@@ -40,6 +40,7 @@ const PEER_DEPS = [
 
 /**
  * Execute a command and return output
+ *
  * @param {string} cmd - Command to execute
  * @returns {string} Command output
  */
@@ -55,6 +56,7 @@ function exec(cmd) {
 
 /**
  * Get available configs from the source file
+ *
  * @returns {Promise<Array<{name: string, description: string, files: string}>|null>} Available configs
  */
 async function getAvailableConfigs() {
@@ -95,7 +97,7 @@ async function getAvailableConfigs() {
     }
 
     return configs
-  } catch(error) {
+  } catch {
     return null
   }
 }
@@ -134,6 +136,7 @@ async function showHelp() {
 
 /**
  * Check if a package is already installed
+ *
  * @param {string} packageName - Name of package to check
  * @returns {Promise<boolean>} True if installed
  */
@@ -154,7 +157,7 @@ async function isInstalled(packageName) {
     }
 
     return packageName in allDeps
-  } catch(error) {
+  } catch {
     return false
   }
 }
@@ -204,6 +207,7 @@ async function install() {
 
 /**
  * Generate eslint.config.js file
+ *
  * @param {string[]} targets - Target environments (node, web, react, etc.)
  */
 async function generateConfig(targets = []) {

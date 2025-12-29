@@ -172,7 +172,7 @@ npx @gesslar/uglier --help
 If you prefer manual control:
 
 ```bash
-npm install --save-dev @gesslar/uglier eslint
+npm install -D @gesslar/uglier eslint
 ```
 
 Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
