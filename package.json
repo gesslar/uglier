@@ -44,6 +44,9 @@
   "peerDependencies": {
     "eslint": "^9.0.0"
   },
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
     "@gesslar/colours": "^0.0.1",
     "@gesslar/toolkit": "^3.1.0",
