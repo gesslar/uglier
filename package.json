@@ -1,7 +1,11 @@
 {
   "name": "@gesslar/uglier",
   "description": "Composable ESLint flat config blocks for stylistic, JSDoc, and environment presets.",
-  "author": "gesslar",
+  "author": {
+    "name": "gesslar",
+    "email": "bmw@gesslar.dev",
+    "url": "https://gesslar.dev"
+  },
   "version": "0.2.0",
   "repository": {
     "type": "git",
@@ -50,7 +54,7 @@
   },
   "dependencies": {
     "@gesslar/colours": "^0.0.1",
-    "@gesslar/toolkit": "^3.3.0",
+    "@gesslar/toolkit": "^3.4.0",
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.5.0",
     "globals": "^16.5.0"
