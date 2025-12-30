@@ -35,7 +35,10 @@
     "lint:fix": "eslint --fix",
     "update": "pnpm up -L",
     "submit": "pnpm publish --access public --//registry.npmjs.org/:_authToken=\"${NPM_ACCESS_TOKEN}\"",
-    "pr": "gt submit -p --ai"
+    "pr": "gt submit -p --ai",
+    "patch": "pnpm version patch",
+    "minor": "pnpm version minor",
+    "major": "pnpm version major"
   },
   "license": "Unlicense",
   "peerDependencies": {
@@ -43,7 +46,7 @@
   },
   "dependencies": {
     "@gesslar/colours": "^0.0.1",
-    "@gesslar/toolkit": "^3.0.1",
+    "@gesslar/toolkit": "^3.1.0",
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.5.0",
     "globals": "^16.5.0"
