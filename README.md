@@ -42,6 +42,8 @@ npx @gesslar/uglier
 
 This automatically installs `@gesslar/uglier`, `eslint`, and all dependencies.
 
+**Package Manager Support:** Automatically detects and uses your preferred package manager (npm, pnpm, yarn, or Bun). Use `pnpx`, `yarn dlx`, or `bunx` instead of `npx` - the installer will detect your choice and install packages accordingly.
+
 ## Usage
 
 ### Generated Config
@@ -165,6 +167,11 @@ npx @gesslar/uglier init node web  # Multiple targets
 
 # Show available configs
 npx @gesslar/uglier --help
+
+# Works with any package manager
+pnpx @gesslar/uglier init node  # pnpm
+yarn dlx @gesslar/uglier init node  # yarn
+bunx @gesslar/uglier init node  # bun
 ```
 
 ## Manual Installation
@@ -172,7 +179,17 @@ npx @gesslar/uglier --help
 If you prefer manual control:
 
 ```bash
-npm install -D @gesslar/uglier eslint
+# npm
+npm i -D @gesslar/uglier eslint
+
+# pnpm
+pnpm i -D @gesslar/uglier eslint
+
+# yarn
+yarn add -D @gesslar/uglier eslint
+
+# bun
+bun add -d @gesslar/uglier eslint
 ```
 
 Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
