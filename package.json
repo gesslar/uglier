@@ -6,7 +6,7 @@
     "email": "bmw@gesslar.dev",
     "url": "https://gesslar.dev"
   },
-  "version": "0.5.0",
+  "version": "0.5.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
