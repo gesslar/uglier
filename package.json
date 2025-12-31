@@ -6,7 +6,7 @@
     "email": "bmw@gesslar.dev",
     "url": "https://gesslar.dev"
   },
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
@@ -55,6 +55,7 @@
   "dependencies": {
     "@gesslar/colours": "^0.0.1",
     "@gesslar/toolkit": "^3.4.0",
+    "@skarab/detect-package-manager": "^1.0.0",
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.5.0",
     "globals": "^16.5.0"

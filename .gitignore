@@ -5,3 +5,4 @@ work/
 *.cpuprofile
 gesslar-uglier-*.tgz
 .package-lock.json
+.claude/

@@ -26,6 +26,7 @@ import {dirname} from "path"
 import {fileURLToPath} from "url"
 import {FileObject, DirectoryObject} from "@gesslar/toolkit"
 import c from "@gesslar/colours"
+import {detectAgent} from "@skarab/detect-package-manager"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -37,6 +38,28 @@ const PACKAGE_NAME = "@gesslar/uglier"
 const PEER_DEPS = [
   "eslint"
 ]
+
+/**
+ * Get install command for detected package manager
+ *
+ * @returns {Promise<{manager: string, installCmd: string}>} Package manager info
+ */
+async function getPackageManagerInfo() {
+  const agent = await detectAgent()
+  const manager = agent?.name || "npm"
+
+  const commands = {
+    npm: "npm i -D",
+    pnpm: "pnpm i -D",
+    yarn: "yarn add -D",
+    bun: "bun add -d"
+  }
+
+  return {
+    manager,
+    installCmd: commands[manager] || commands.npm
+  }
+}
 
 /**
  * Execute a command and return output
@@ -145,7 +168,7 @@ async function isInstalled(packageName) {
     const packageJsonFile = new FileObject("package.json", process.cwd())
 
     if(!(await packageJsonFile.exists)) {
-      console.warn(c`No {<B}package.json{B>} found. Please run {<B}'npm init'{B>} first.`)
+      console.warn(c`No {<B}package.json{B>} found. Please initialize your project first.`)
       process.exit(1)
     }
 
@@ -191,10 +214,12 @@ async function install() {
   if(toInstall.length > 0) {
     console.log(c`\n{F027} Installing:{/} ${toInstall.map(p => c`{F172}${p}{/}`).join(", ")}`)
 
-    const installCmd = `npm install -D ${toInstall.join(" ")}`
+    const {manager, installCmd} = await getPackageManagerInfo()
+    const fullCmd = `${installCmd} ${toInstall.join(" ")}`
 
-    console.log(c`{F244}Running: ${installCmd}{/}`)
-    exec(installCmd)
+    console.log(c`{F244}Using package manager: ${manager}{/}`)
+    console.log(c`{F244}Running: ${fullCmd}{/}`)
+    exec(fullCmd)
 
     console.log()
     console.log(c`{F070}✓{/} Installation successful.`)
