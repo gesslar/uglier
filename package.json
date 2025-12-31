@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@gesslar/colours": "^0.5.0",
-    "@gesslar/toolkit": "^3.5.0",
+    "@gesslar/toolkit": "^3.6.3",
     "@skarab/detect-package-manager": "^1.0.0",
     "@stylistic/eslint-plugin": "^5.6.1",
     "eslint-plugin-jsdoc": "^61.5.0",
