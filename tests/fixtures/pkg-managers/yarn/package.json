@@ -1,0 +1,9 @@
+{
+  "name": "test-yarn-project",
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "yarn@4.0.0",
+  "devDependencies": {
+    "eslint": "^9.39.2"
+  }
+}

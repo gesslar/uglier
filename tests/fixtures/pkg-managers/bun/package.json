@@ -1,0 +1,9 @@
+{
+  "name": "test-bun-project",
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "bun@1.0.0",
+  "devDependencies": {
+    "eslint": "^9.39.2"
+  }
+}
