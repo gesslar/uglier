@@ -2,7 +2,10 @@
 
 **Opinionated, composable ESLint flat config for people who like their code readable.**
 
-A flexible ESLint configuration system built on [flat config](https://eslint.org/docs/latest/use/configure/configuration-files) that lets you mix and match stylistic rules, JSDoc enforcement, and environment presets.
+A flexible ESLint configuration system built on
+[flat config](https://eslint.org/docs/latest/use/configure/configuration-files)
+that lets you mix and match stylistic rules, JSDoc enforcement, and environment
+presets.
 
 ## Monotribe
 
@@ -30,14 +33,16 @@ kthx
 ## Quick Start
 
 ```bash
-# Install and set up in one command
+# Install dependencies and generate config in one command
+npx @gesslar/uglier install
 npx @gesslar/uglier init node
 
 # Or for React projects
+npx @gesslar/uglier install
 npx @gesslar/uglier init react
 
-# Or just install without config generation
-npx @gesslar/uglier
+# Forgot to add React later? No problem!
+npx @gesslar/uglier add react
 ```
 
 This automatically installs `@gesslar/uglier`, `eslint`, and all dependencies.
@@ -156,8 +161,8 @@ Run `npx @gesslar/uglier --help` to see all available configs with descriptions.
 ## Commands
 
 ```bash
-# Install dependencies only
-npx @gesslar/uglier
+# Install dependencies
+npx @gesslar/uglier install
 
 # Generate config for specific targets
 npx @gesslar/uglier init node
@@ -165,13 +170,22 @@ npx @gesslar/uglier init web
 npx @gesslar/uglier init react
 npx @gesslar/uglier init node web  # Multiple targets
 
+# Add config blocks to existing eslint.config.js
+npx @gesslar/uglier add react
+npx @gesslar/uglier add tauri vscode-extension  # Multiple targets
+
+# Remove config blocks from existing eslint.config.js
+npx @gesslar/uglier remove react
+npx @gesslar/uglier remove web tauri  # Multiple targets
+# Note: Also removes any overrides for removed targets
+
 # Show available configs
 npx @gesslar/uglier --help
 
 # Works with any package manager
-pnpx @gesslar/uglier init node  # pnpm
-yarn dlx @gesslar/uglier init node  # yarn
-bunx @gesslar/uglier init node  # bun
+pnpx @gesslar/uglier install  # pnpm
+yarn dlx @gesslar/uglier install  # yarn
+bunx @gesslar/uglier install  # bun
 ```
 
 ## Manual Installation
@@ -193,6 +207,19 @@ bun add -d @gesslar/uglier eslint
 ```
 
 Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
+
+## Development
+
+```bash
+# Run tests
+npm test
+
+# Run linter
+npm run lint
+
+# Fix linting issues
+npm run lint:fix
+```
 
 ## Philosophy
 
