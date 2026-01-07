@@ -5,16 +5,15 @@
 import {execSync} from "child_process"
 import {
   FileObject,
-  DirectoryObject,
-  CappedDirectoryObject,
+  VDirectoryObject,
   Sass
 } from "@gesslar/toolkit"
 import c from "@gesslar/colours"
 import {detectAgent} from "@skarab/detect-package-manager"
 
-// Use CappedDirectoryObject to ensure we never accidentally venture outside project
+// Use VDirectoryObject to ensure we never accidentally venture outside project
 // Cap at project root - this becomes our sandbox boundary
-const PROJECT_ROOT = CappedDirectoryObject.fromCwd()
+const PROJECT_ROOT = VDirectoryObject.fromCwd()
 const SRC_DIR = PROJECT_ROOT.getDirectory("src")
 const PACKAGE_NAME = "@gesslar/uglier"
 
@@ -120,9 +119,8 @@ export function exec(cmd) {
 export async function getAvailableConfigs() {
   try {
     // Try to read from installed package or local source
-    const cwd = new CappedDirectoryObject(process.cwd())
-    const installedDir = new DirectoryObject(`node_modules/${PACKAGE_NAME}/src`, cwd)
-
+    const cwd = VDirectoryObject.fromCwd()
+    const installedDir = cwd.getDirectory(`node_modules/${PACKAGE_NAME}/src`)
     const localSource = new FileObject("uglier.js", SRC_DIR)
     const installedSource = new FileObject("uglier.js", installedDir)
 
@@ -168,7 +166,7 @@ export async function getAvailableConfigs() {
  */
 export async function isInstalled(packageName) {
   try {
-    const cwd = new CappedDirectoryObject(process.cwd())
+    const cwd = VDirectoryObject.fromCwd()
     const packageJsonFile = new FileObject("package.json", cwd)
 
     if(!(await packageJsonFile.exists)) {
@@ -241,8 +239,8 @@ export async function install() {
  * @returns {Promise<boolean>} True if successful
  */
 export async function generateConfig(targets = []) {
-  const cwd = new CappedDirectoryObject(process.cwd())
-  const configFile = new FileObject("eslint.config.js", cwd)
+  const cwd = VDirectoryObject.fromCwd()
+  const configFile = cwd.getFile("eslint.config.js")
 
   if(await configFile.exists) {
     console.log(c`{F214}Error:{/} {<B}eslint.config.js{B>} already exists`)
@@ -336,8 +334,8 @@ ${withLines}
  * @returns {Promise<boolean>} True if successful
  */
 export async function addToConfig(targets = []) {
-  const cwd = new CappedDirectoryObject(process.cwd())
-  const configFile = new FileObject("eslint.config.js", cwd)
+  const cwd = VDirectoryObject.fromCwd()
+  const configFile = cwd.getFile("eslint.config.js")
 
   if(!(await configFile.exists)) {
     console.log(c`{F214}Error:{/} {<B}eslint.config.js{B>} not found`)
@@ -461,8 +459,8 @@ export async function addToConfig(targets = []) {
  * @returns {Promise<{success: boolean, removedTargets: string[], removedOverrides: string[]}>} Result info
  */
 export async function removeFromConfig(targets = []) {
-  const cwd = new CappedDirectoryObject(process.cwd())
-  const configFile = new FileObject("eslint.config.js", cwd)
+  const cwd = VDirectoryObject.fromCwd()
+  const configFile = cwd.getFile("eslint.config.js")
 
   if(!(await configFile.exists)) {
     console.log(c`{F214}Error:{/} {<B}eslint.config.js{B>} not found`)
