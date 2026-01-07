@@ -4,7 +4,6 @@
 
 import {execSync} from "child_process"
 import {
-  FileObject,
   VDirectoryObject,
   Sass
 } from "@gesslar/toolkit"
@@ -121,8 +120,8 @@ export async function getAvailableConfigs() {
     // Try to read from installed package or local source
     const cwd = VDirectoryObject.fromCwd()
     const installedDir = cwd.getDirectory(`node_modules/${PACKAGE_NAME}/src`)
-    const localSource = new FileObject("uglier.js", SRC_DIR)
-    const installedSource = new FileObject("uglier.js", installedDir)
+    const localSource = SRC_DIR.getFile("uglier.js")
+    const installedSource = installedDir.getFile("uglier.js")
 
     let uglierFile = null
 
@@ -167,7 +166,7 @@ export async function getAvailableConfigs() {
 export async function isInstalled(packageName) {
   try {
     const cwd = VDirectoryObject.fromCwd()
-    const packageJsonFile = new FileObject("package.json", cwd)
+    const packageJsonFile = cwd.getFile("package.json")
 
     if(!(await packageJsonFile.exists)) {
       console.warn(c`No {<B}package.json{B>} found. Please initialize your project first.`)
