@@ -224,7 +224,15 @@ const CONFIGS = {
         "jsdoc/check-types": "error",
         "jsdoc/require-param-type": "error",
         "jsdoc/require-returns-type": "error",
+        "jsdoc/valid-types": "error",
+        "jsdoc/no-undefined-types": "error",
+        "jsdoc/require-property": "error",
         ...overrides,
+      },
+      settings: {
+        jsdoc: {
+          mode: "typescript"
+        }
       }
     }
   },
