@@ -4,15 +4,13 @@
 
 import {execSync} from "child_process"
 import {
-  VDirectoryObject,
+  DirectoryObject,
   Sass
 } from "@gesslar/toolkit"
 import c from "@gesslar/colours"
 import {detectAgent} from "@skarab/detect-package-manager"
 
-// Use VDirectoryObject to ensure we never accidentally venture outside project
-// Cap at project root - this becomes our sandbox boundary
-const PROJECT_ROOT = VDirectoryObject.fromCwd()
+const PROJECT_ROOT = DirectoryObject.fromCwd()
 const SRC_DIR = PROJECT_ROOT.getDirectory("src")
 const PACKAGE_NAME = "@gesslar/uglier"
 
@@ -118,7 +116,7 @@ export function exec(cmd) {
 export async function getAvailableConfigs() {
   try {
     // Try to read from installed package or local source
-    const cwd = VDirectoryObject.fromCwd()
+    const cwd = DirectoryObject.fromCwd()
     const installedDir = cwd.getDirectory(`node_modules/${PACKAGE_NAME}/src`)
     const localSource = SRC_DIR.getFile("uglier.js")
     const installedSource = installedDir.getFile("uglier.js")
@@ -165,7 +163,7 @@ export async function getAvailableConfigs() {
  */
 export async function isInstalled(packageName) {
   try {
-    const cwd = VDirectoryObject.fromCwd()
+    const cwd = DirectoryObject.fromCwd()
     const packageJsonFile = cwd.getFile("package.json")
 
     if(!(await packageJsonFile.exists)) {
@@ -238,7 +236,7 @@ export async function install() {
  * @returns {Promise<boolean>} True if successful
  */
 export async function generateConfig(targets = []) {
-  const cwd = VDirectoryObject.fromCwd()
+  const cwd = DirectoryObject.fromCwd()
   const configFile = cwd.getFile("eslint.config.js")
 
   if(await configFile.exists) {
@@ -333,7 +331,7 @@ ${withLines}
  * @returns {Promise<boolean>} True if successful
  */
 export async function addToConfig(targets = []) {
-  const cwd = VDirectoryObject.fromCwd()
+  const cwd = DirectoryObject.fromCwd()
   const configFile = cwd.getFile("eslint.config.js")
 
   if(!(await configFile.exists)) {
@@ -458,7 +456,7 @@ export async function addToConfig(targets = []) {
  * @returns {Promise<{success: boolean, removedTargets: string[], removedOverrides: string[]}>} Result info
  */
 export async function removeFromConfig(targets = []) {
-  const cwd = VDirectoryObject.fromCwd()
+  const cwd = DirectoryObject.fromCwd()
   const configFile = cwd.getFile("eslint.config.js")
 
   if(!(await configFile.exists)) {
