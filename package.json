@@ -16,7 +16,7 @@
   "bin": {
     "uglier": "./src/install.js"
   },
-  "packageManager": "pnpm@10.26.2",
+  "packageManager": "pnpm@10.28.1",
   "files": [
     "src",
     "bin",
@@ -53,15 +53,15 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@gesslar/colours": "^0.7.1",
-    "@gesslar/toolkit": "^3.17.0",
+    "@gesslar/colours": "^0.8.0",
+    "@gesslar/toolkit": "^3.23.0",
     "@skarab/detect-package-manager": "^1.0.0",
-    "@stylistic/eslint-plugin": "^5.6.1",
-    "eslint-plugin-jsdoc": "^61.5.0",
+    "@stylistic/eslint-plugin": "^5.7.0",
+    "eslint-plugin-jsdoc": "^62.2.0",
     "globals": "^17.0.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": "^0.5.1",
+    "@gesslar/uglier": "^1.1.0",
     "eslint": "^9.39.2"
   }
 }
