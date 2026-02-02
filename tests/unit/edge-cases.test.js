@@ -12,6 +12,7 @@ import {
   addToConfig,
   removeFromConfig
 } from "../../bin/cli.js"
+import {setupPackageSymlink, importGeneratedConfig} from "../helpers/config.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -22,6 +23,7 @@ const FIXTURES_DIR = join(__dirname, "../fixtures")
 describe("Edge Cases", () => {
   before(async() => {
     await mkdir(TEST_DIR, {recursive: true})
+    await setupPackageSymlink(TEST_DIR)
   })
 
   after(async() => {
@@ -68,6 +70,8 @@ describe("Edge Cases", () => {
       assert.match(content, /"tauri"/)
       assert.match(content, /"react"/) // Original still there
       assert.match(content, /"node"/) // Original still there
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should not add duplicates to messy config", async() => {
@@ -94,6 +98,8 @@ describe("Edge Cases", () => {
       assert.match(content, /"node":\s*\{/)
       // React override should be gone
       assert.doesNotMatch(content, /"react":\s*\{/)
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should handle removing multiple targets with overrides", async() => {
@@ -110,6 +116,8 @@ describe("Edge Cases", () => {
       assert.doesNotMatch(content, /"react":\s*\{/)
       // Web override should still be there
       assert.match(content, /"web":\s*\{/)
+
+      await importGeneratedConfig(configPath)
     })
   })
 
@@ -190,6 +198,8 @@ describe("Edge Cases", () => {
       assert.match(content, /"tauri"/)
       assert.match(content, /"node"/)
       assert.match(content, /"react"/)
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should detect duplicates in weird spacing", async() => {
@@ -208,6 +218,8 @@ describe("Edge Cases", () => {
       const content = await readFile(configPath, "utf-8")
 
       assert.doesNotMatch(content, /^\s*"react"/m)
+
+      await importGeneratedConfig(configPath)
     })
   })
 
@@ -249,6 +261,8 @@ describe("Edge Cases", () => {
       const content = await readFile(configPath, "utf-8")
 
       assert.match(content, /"tauri"/)
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should detect duplicates regardless of quote style", async() => {
@@ -267,6 +281,8 @@ describe("Edge Cases", () => {
 
       // Should not match either 'react' or "react"
       assert.doesNotMatch(content, /^\s*['"]react['"]/m)
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should clean overrides with mixed quotes", async() => {
@@ -280,6 +296,8 @@ describe("Edge Cases", () => {
 
       // Node override should be gone (both quote styles)
       assert.doesNotMatch(content, /['"]node['"]:\s*\{/)
+
+      await importGeneratedConfig(configPath)
     })
   })
 })

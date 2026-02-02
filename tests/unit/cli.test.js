@@ -13,6 +13,7 @@ import {
   addToConfig,
   removeFromConfig
 } from "../../bin/cli.js"
+import {setupPackageSymlink, importGeneratedConfig} from "../helpers/config.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -22,8 +23,8 @@ const FIXTURES_DIR = join(__dirname, "../fixtures")
 
 describe("CLI Functions", () => {
   before(async() => {
-    // Create temp directory for tests
     await mkdir(TEST_DIR, {recursive: true})
+    await setupPackageSymlink(TEST_DIR)
   })
 
   after(async() => {
@@ -74,6 +75,11 @@ describe("CLI Functions", () => {
       assert.match(content, /"lints-js"/)
       assert.match(content, /"lints-jsdoc"/)
       assert.match(content, /"node"/)
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("lints-js")))
+      assert.ok(names.some(n => n?.includes("node")))
     })
 
     it("should fail if no targets specified", async() => {
@@ -103,6 +109,11 @@ describe("CLI Functions", () => {
 
       assert.match(content, /"node"/)
       assert.match(content, /"web"/)
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("node")))
+      assert.ok(names.some(n => n?.includes("web")))
     })
   })
 
@@ -152,6 +163,11 @@ describe("CLI Functions", () => {
 
       assert.match(content, /"react"/)
       assert.match(content, /"node"/) // Original still there
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("react")))
+      assert.ok(names.some(n => n?.includes("node")))
     })
 
     it("should fail if no config exists", async() => {
@@ -184,6 +200,11 @@ describe("CLI Functions", () => {
 
       assert.match(content, /"react"/)
       assert.match(content, /"web"/)
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("react")))
+      assert.ok(names.some(n => n?.includes("web")))
     })
   })
 
@@ -232,6 +253,12 @@ describe("CLI Functions", () => {
       assert.doesNotMatch(content, /"react"/)
       assert.match(content, /"node"/) // Still there
       assert.match(content, /"web"/) // Still there
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("node")))
+      assert.ok(names.some(n => n?.includes("web")))
+      assert.ok(!names.some(n => n?.includes("react")))
     })
 
     it("should fail if no config exists", async() => {
@@ -275,6 +302,8 @@ describe("CLI Functions", () => {
       assert.doesNotMatch(content, /"react":\s*\{/)
       // Node override should still be there
       assert.match(content, /"node":\s*\{/)
+
+      await importGeneratedConfig(configPath)
     })
 
     it("should handle removing multiple targets", async() => {
@@ -291,6 +320,12 @@ describe("CLI Functions", () => {
       assert.doesNotMatch(content, /"react"/)
       assert.doesNotMatch(content, /"web"/)
       assert.match(content, /"node"/)
+
+      const config = await importGeneratedConfig(configPath)
+      const names = config.map(c => c.name)
+      assert.ok(names.some(n => n?.includes("node")))
+      assert.ok(!names.some(n => n?.includes("react")))
+      assert.ok(!names.some(n => n?.includes("web")))
     })
 
     it("should warn about non-existent targets but still remove valid ones", async() => {

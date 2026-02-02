@@ -374,7 +374,7 @@ export async function addToConfig(targets = []) {
   const existingContent = await configFile.read()
 
   // Parse the with array from the existing config
-  const withMatch = existingContent.match(/with:\s*\[([\s\S]*?)\]/m)
+  const withMatch = existingContent.match(/with:\s*\[([\s\S]*?)\n\s*\]/m)
   const existingTargets = parseTargetsFromConfig(existingContent)
 
   if(existingTargets.length === 0 || !withMatch) {
@@ -427,7 +427,7 @@ export async function addToConfig(targets = []) {
   }
 
   const newContent = existingContent.replace(
-    /with:\s*\[([\s\S]*?)\]/m,
+    /with:\s*\[([\s\S]*?)\n\s*\]/m,
     `with: [\n${newWithContent}\n    ]`
   )
 
@@ -549,21 +549,56 @@ export async function removeFromConfig(targets = []) {
 
   // Check for and remove overrides for removed targets
   const removedOverrides = []
-  const overridesMatch = existingContent.match(/overrides:\s*\{([\s\S]*?)\n\s*\}/m)
+  const overridesMatch = newContent.match(/overrides:\s*\{/m)
 
   if(overridesMatch) {
     for(const target of targetsToRemove) {
-      // Match override block for this target
-      const overridePattern = new RegExp(`\\s*["']${target}["']:\\s*\\{[^}]*\\},?`, "g")
+      // Find the start of this target's override entry
+      const targetPattern = new RegExp(`[\\s,]*(?:\\/\\/[^\\n]*\\n\\s*)?["']${target}["']:\\s*\\{`)
+      const targetMatch = targetPattern.exec(newContent)
 
-      if(overridePattern.test(newContent)) {
-        removedOverrides.push(target)
-        newContent = newContent.replace(overridePattern, "")
+      if(targetMatch) {
+        // Count braces to find the full extent of the block
+        const blockStart = targetMatch.index
+        let braceDepth = 0
+        let blockEnd = -1
+
+        for(let i = blockStart; i < newContent.length; i++) {
+          if(newContent[i] === "{") {
+            braceDepth++
+          } else if(newContent[i] === "}") {
+            braceDepth--
+
+            if(braceDepth === 0) {
+              blockEnd = i + 1
+
+              // Skip trailing comma if present
+              if(newContent[blockEnd] === ",") {
+                blockEnd++
+              }
+
+              break
+            }
+          }
+        }
+
+        if(blockEnd !== -1) {
+          removedOverrides.push(target)
+          newContent = newContent.slice(0, blockStart)
+            + newContent.slice(blockEnd)
+        }
       }
     }
 
+    // Ensure commas between remaining override entries
+    newContent = newContent.replace(
+      /\}(\s*["'][\w-]+["']:\s*\{)/g, "},$1"
+    )
+
     // Clean up empty overrides object or trailing commas
-    newContent = newContent.replace(/overrides:\s*\{\s*,?\s*\}/m, "")
+    newContent = newContent.replace(
+      /overrides:\s*\{\s*,?\s*\}/m, ""
+    )
     newContent = newContent.replace(/,(\s*)\}/g, "$1}")
   }
 
