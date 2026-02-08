@@ -5,7 +5,7 @@
 import assert from "node:assert/strict"
 import {mkdir, symlink, rm} from "node:fs/promises"
 import {dirname, resolve} from "node:path"
-import {fileURLToPath} from "url"
+import {fileURLToPath, pathToFileURL} from "url"
 import {join} from "node:path"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -36,7 +36,9 @@ export async function setupPackageSymlink(testDir) {
  * @returns {Promise<Array>} The resolved config array
  */
 export async function importGeneratedConfig(configPath) {
-  const module = await import(`${configPath}?t=${Date.now()}`)
+  const fileUrl = pathToFileURL(configPath)
+  fileUrl.searchParams.set("t", Date.now().toString())
+  const module = await import(fileUrl.href)
   const config = module.default
 
   assert.ok(Array.isArray(config), "Config default export should be an array")
