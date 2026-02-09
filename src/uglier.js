@@ -433,9 +433,9 @@ const CONFIGS = {
  * Compose ESLint configuration from named config blocks
  *
  * @param {object} options - Composition options
- * @param {string[]} options.with - Config names to include
- * @param {string[]} options.without - Config names to exclude (higher precedence)
- * @param {object} options.overrides - Per-config options overrides
+ * @param {string[]} [options.with] - Config names to include
+ * @param {string[]} [options.without] - Config names to exclude (higher precedence)
+ * @param {object} [options.overrides] - Per-config options overrides
  * @returns {Array} ESLint flat config array
  */
 export default function(options = {}) {
