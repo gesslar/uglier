@@ -5,7 +5,7 @@
     "name": "gesslar",
     "url": "https://gesslar.dev"
   },
-  "version": "1.4.0",
+  "version": "1.4.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
@@ -16,7 +16,7 @@
   "bin": {
     "uglier": "./src/install.js"
   },
-  "packageManager": "pnpm@10.29.1",
+  "packageManager": "pnpm@10.29.2",
   "files": [
     "src",
     "bin",
@@ -54,11 +54,11 @@
   },
   "dependencies": {
     "@gesslar/colours": ">=0.8.0",
-    "@gesslar/toolkit": ">=3.33.0",
+    "@gesslar/toolkit": ">=3.33.1",
     "@skarab/detect-package-manager": ">=1.0.0",
+    "@stylistic/eslint-plugin": "^5.8.0",
     "eslint-plugin-jsdoc": ">=62.5.4",
-    "globals": ">=17.3.0",
-    "@stylistic/eslint-plugin": "^5.7.1"
+    "globals": ">=17.3.0"
   },
   "devDependencies": {
     "@gesslar/uglier": ">=1.4.0",

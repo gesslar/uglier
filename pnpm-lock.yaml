@@ -12,14 +12,14 @@ importers:
         specifier: '>=0.8.0'
         version: 0.8.0
       '@gesslar/toolkit':
-        specifier: '>=3.33.0'
-        version: 3.33.0
+        specifier: '>=3.33.1'
+        version: 3.33.1
       '@skarab/detect-package-manager':
         specifier: '>=1.0.0'
         version: 1.0.0
       '@stylistic/eslint-plugin':
-        specifier: ^5.7.1
-        version: 5.7.1(eslint@10.0.0)
+        specifier: ^5.8.0
+        version: 5.8.0(eslint@10.0.0)
       eslint-plugin-jsdoc:
         specifier: '>=62.5.4'
         version: 62.5.4(eslint@10.0.0)
@@ -79,8 +79,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@gesslar/toolkit@3.33.0':
-    resolution: {integrity: sha512-b1X42ncTNFu5+Qm+FTU7vgpobB4sLDV8cLbAx77RNNUyGxoFmgR4a2t6OnUhQeCddv2qHFo/izm9LbrBSxYVAw==}
+  '@gesslar/toolkit@3.33.1':
+    resolution: {integrity: sha512-csao8zoxM2aVuRmYtHGpkwglzpXywpIznV7UQRafp41TakDoETgHc2k58NSIuukM3/Zb8+IOnWthJGkEEaC11g==}
     engines: {node: '>=24.13.0'}
 
   '@gesslar/uglier@1.4.0':
@@ -122,8 +122,8 @@ packages:
     resolution: {integrity: sha512-CuU1x6LgkJIF+H8FCnKijx6DbWVP1Y7kqPk88LSxNe0ulbe3BZ37qd3AaX3t5vnFZESLFMcjQd2dlPhdvWNSdQ==}
     engines: {node: '>=14', pnpm: '>=7'}
 
-  '@stylistic/eslint-plugin@5.7.1':
-    resolution: {integrity: sha512-zjTUwIsEfT+k9BmXwq1QEFYsb4afBlsI1AXFyWQBgggMzwBFOuu92pGrE5OFx90IOjNl+lUbQoTG7f8S0PkOdg==}
+  '@stylistic/eslint-plugin@5.8.0':
+    resolution: {integrity: sha512-WNPVF/FfBAjyi3OA7gok8swRiImNLKI4dmV3iK/GC/0xSJR7eCzBFsw9hLZVgb1+MYNLy7aDsjohxN1hA/FIfQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=9.0.0'
@@ -488,7 +488,7 @@ snapshots:
 
   '@gesslar/colours@0.8.0': {}
 
-  '@gesslar/toolkit@3.33.0':
+  '@gesslar/toolkit@3.33.1':
     dependencies:
       '@gesslar/colours': 0.8.0
       ajv: 8.17.1
@@ -499,9 +499,9 @@ snapshots:
   '@gesslar/uglier@1.4.0(eslint@10.0.0)':
     dependencies:
       '@gesslar/colours': 0.8.0
-      '@gesslar/toolkit': 3.33.0
+      '@gesslar/toolkit': 3.33.1
       '@skarab/detect-package-manager': 1.0.0
-      '@stylistic/eslint-plugin': 5.7.1(eslint@10.0.0)
+      '@stylistic/eslint-plugin': 5.8.0(eslint@10.0.0)
       eslint: 10.0.0
       eslint-plugin-jsdoc: 62.5.4(eslint@10.0.0)
       globals: 17.3.0
@@ -529,7 +529,7 @@ snapshots:
 
   '@skarab/detect-package-manager@1.0.0': {}
 
-  '@stylistic/eslint-plugin@5.7.1(eslint@10.0.0)':
+  '@stylistic/eslint-plugin@5.8.0(eslint@10.0.0)':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.0.0)
       '@typescript-eslint/types': 8.54.0
