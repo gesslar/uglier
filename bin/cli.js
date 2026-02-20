@@ -24,7 +24,7 @@ const PEER_DEPS = [
  * Parse targets from config file's with array
  *
  * @param {string} content - File content
- * @returns {string[]} Array of target names
+ * @returns {Array<string>} Array of target names
  */
 function parseTargetsFromConfig(content) {
   // Match the entire with array, being careful not to stop at nested brackets
@@ -232,7 +232,7 @@ export async function install() {
 /**
  * Generate eslint.config.js file
  *
- * @param {string[]} targets - Target environments (node, web, react, etc.)
+ * @param {Array<string>} targets - Target environments (node, web, react, etc.)
  * @returns {Promise<boolean>} True if successful
  */
 export async function generateConfig(targets = []) {
@@ -327,7 +327,7 @@ ${withLines}
 /**
  * Add config blocks to existing eslint.config.js
  *
- * @param {string[]} targets - Target environments to add (node, web, react, etc.)
+ * @param {Array<string>} targets - Target environments to add (node, web, react, etc.)
  * @returns {Promise<boolean>} True if successful
  */
 export async function addToConfig(targets = []) {
@@ -452,8 +452,8 @@ export async function addToConfig(targets = []) {
 /**
  * Remove config blocks from existing eslint.config.js
  *
- * @param {string[]} targets - Target environments to remove (node, web, react, etc.)
- * @returns {Promise<{success: boolean, removedTargets: string[], removedOverrides: string[]}>} Result info
+ * @param {Array<string>} targets - Target environments to remove (node, web, react, etc.)
+ * @returns {Promise<{success: boolean, removedTargets: Array<string>, removedOverrides: Array<string>}>} Result info
  */
 export async function removeFromConfig(targets = []) {
   const cwd = DirectoryObject.fromCwd()
