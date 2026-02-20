@@ -60,8 +60,8 @@ export async function getPackageManagerInfo() {
   const manager = agent?.name || "npm"
 
   const commands = {
-    npm: "npm i -D",
-    pnpm: "pnpm i -D",
+    npm: "npm i -D --legacy-peer-deps",
+    pnpm: "pnpm add -D --no-strict-peer-dependencies",
     yarn: "yarn add -D",
     bun: "bun add -d"
   }
