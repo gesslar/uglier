@@ -16,7 +16,6 @@
   "bin": {
     "uglier": "./src/install.js"
   },
-  "packageManager": "pnpm@10.29.2",
   "files": [
     "src",
     "bin",
@@ -38,12 +37,12 @@
     "test": "node --test tests/unit/*.test.js",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "update": "pnpm self-update && pnpx npm-check-updates -u && pnpm install",
-    "submit": "pnpm publish --access public --//registry.npmjs.org/:_authToken=\"${NPM_ACCESS_TOKEN}\"",
+    "update": "npx npm-check-updates -u && npm install",
+    "submit": "npm publish --access public --//registry.npmjs.org/:_authToken=\"${NPM_ACCESS_TOKEN}\"",
     "pr": "gt submit -p --ai",
-    "patch": "pnpm version patch",
-    "minor": "pnpm version minor",
-    "major": "pnpm version major"
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
   },
   "license": "Unlicense",
   "peerDependencies": {
@@ -54,14 +53,14 @@
   },
   "dependencies": {
     "@gesslar/colours": ">=0.8.0",
-    "@gesslar/toolkit": ">=3.33.1",
+    "@gesslar/toolkit": ">=3.37.0",
     "@skarab/detect-package-manager": ">=1.0.0",
-    "@stylistic/eslint-plugin": "^5.8.0",
-    "eslint-plugin-jsdoc": ">=62.5.4",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "eslint-plugin-jsdoc": ">=62.6.1",
     "globals": ">=17.3.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=1.4.0",
+    "@gesslar/uglier": ">=1.4.1",
     "eslint": ">=10.0.0"
   }
 }
