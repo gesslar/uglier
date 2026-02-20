@@ -14,12 +14,6 @@ const PROJECT_ROOT = DirectoryObject.fromCwd()
 const SRC_DIR = PROJECT_ROOT.getDirectory("src")
 const PACKAGE_NAME = "@gesslar/uglier"
 
-// Only peer dependencies need to be installed separately
-// (all other dependencies come bundled with the package)
-const PEER_DEPS = [
-  "eslint"
-]
-
 /**
  * Parse targets from config file's with array
  *
@@ -156,74 +150,22 @@ export async function getAvailableConfigs() {
 }
 
 /**
- * Check if a package is already installed
- *
- * @param {string} packageName - Name of package to check
- * @returns {Promise<boolean>} True if installed
- */
-export async function isInstalled(packageName) {
-  try {
-    const cwd = DirectoryObject.fromCwd()
-    const packageJsonFile = cwd.getFile("package.json")
-
-    if(!(await packageJsonFile.exists)) {
-      console.warn(c`No {<B}package.json{B>} found. Please initialize your project first.`)
-      process.exit(1)
-    }
-
-    const packageJson = await packageJsonFile.loadData("json")
-    const allDeps = {
-      ...packageJson.dependencies,
-      ...packageJson.devDependencies,
-      ...packageJson.peerDependencies
-    }
-
-    return packageName in allDeps
-  } catch {
-    return false
-  }
-}
-
-/**
  * Main installation routine
  */
 export async function install() {
   console.log(c`Installing {<B}${PACKAGE_NAME}{B>}...`)
   console.log()
 
-  const toInstall = []
+  const {manager, installCmd} = await getPackageManagerInfo()
+  const packages = [PACKAGE_NAME, "eslint"]
+  const fullCmd = `${installCmd} ${packages.join(" ")}`
 
-  // Check if main package is already installed
-  if(!(await isInstalled(PACKAGE_NAME))) {
-    toInstall.push(PACKAGE_NAME)
-  } else {
-    console.log(c`{F070}✓{/} {<B}${PACKAGE_NAME}{B>} already installed`)
-  }
+  console.log(c`{F244}Using package manager: ${manager}{/}`)
+  console.log(c`{F244}Running: ${fullCmd}{/}`)
+  exec(fullCmd)
 
-  // Check peer dependencies
-  for(const dep of PEER_DEPS) {
-    if(!(await isInstalled(dep))) {
-      toInstall.push(dep)
-    } else {
-      console.log(c`{F070}✓{/} {<B}${dep}{B>} already installed`)
-    }
-  }
-
-  // Install missing packages
-  if(toInstall.length > 0) {
-    console.log(c`\n{F027} Installing:{/} ${toInstall.map(p => c`{F172}${p}{/}`).join(", ")}`)
-
-    const {manager, installCmd} = await getPackageManagerInfo()
-    const fullCmd = `${installCmd} ${toInstall.join(" ")}`
-
-    console.log(c`{F244}Using package manager: ${manager}{/}`)
-    console.log(c`{F244}Running: ${fullCmd}{/}`)
-    exec(fullCmd)
-
-    console.log()
-    console.log(c`{F070}✓{/} Installation successful.`)
-  }
-
+  console.log()
+  console.log(c`{F070}✓{/} Installation successful.`)
   console.log()
   console.log(c`{F039}For detailed setup and configuration options, visit:{/}`)
   console.log(c`https://github.com/gesslar/uglier#readme`)
