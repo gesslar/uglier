@@ -5,13 +5,12 @@
     "name": "gesslar",
     "url": "https://gesslar.dev"
   },
-  "version": "1.4.1",
+  "version": "1.5.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
   },
   "type": "module",
-  "main": "src/uglier.js",
   "exports": "./src/uglier.js",
   "bin": {
     "uglier": "./src/install.js"
