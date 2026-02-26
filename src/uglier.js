@@ -93,7 +93,8 @@ const CONFIGS = {
    */
   "lints-js": (options = {}) => {
     const {
-      files = ["**/*.{js,mjs,cjs}"],
+      files = ["src/**/*.{js,mjs,cjs}"],
+      ignores = [],
       indent = 2,
       maxLen = 80,
       overrides = {},
@@ -102,6 +103,7 @@ const CONFIGS = {
     return {
       name: "gesslar/uglier/lints-js",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       plugins: {
         "@stylistic": stylistic,
       },
@@ -207,12 +209,14 @@ const CONFIGS = {
   "lints-jsdoc": (options = {}) => {
     const {
       files = ["**/*.{js,mjs,cjs}"],
+      ignores = [],
       overrides = {},
     } = options
 
     return {
       name: "gesslar/uglier/lints-jsdoc",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       plugins: {
         jsdoc,
       },
@@ -269,12 +273,14 @@ const CONFIGS = {
   "web": (options = {}) => {
     const {
       files = ["src/**/*.{js,mjs,cjs}"],
+      ignores = [],
       additionalGlobals = {},
     } = options
 
     return {
       name: "gesslar/uglier/web",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         globals: {
           ...globals.browser,
@@ -293,12 +299,14 @@ const CONFIGS = {
   "vscode-extension": (options = {}) => {
     const {
       files = ["src/**/*.{js,mjs,cjs}"],
+      ignores = [],
       additionalGlobals = {},
     } = options
 
     return {
       name: "gesslar/uglier/vscode-extension",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         globals: {
           acquireVsCodeApi: "readonly",
@@ -317,12 +325,14 @@ const CONFIGS = {
   "node": (options = {}) => {
     const {
       files = ["**/*.{js,mjs,cjs}"],
+      ignores = [],
       additionalGlobals = {},
     } = options
 
     return {
       name: "gesslar/uglier/node",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         globals: {
           ...globals.node,
@@ -343,12 +353,14 @@ const CONFIGS = {
   "react": (options = {}) => {
     const {
       files = ["src/**/*.{js,jsx,mjs,cjs}"],
+      ignores = [],
       additionalGlobals = {},
     } = options
 
     return {
       name: "gesslar/uglier/react",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         globals: {
           ...globals.browser,
@@ -369,11 +381,13 @@ const CONFIGS = {
   "cjs-override": (options = {}) => {
     const {
       files = ["**/*.cjs"],
+      ignores = [],
     } = options
 
     return {
       name: "gesslar/uglier/cjs-override",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         sourceType: "script",
         ecmaVersion: 2021
@@ -390,11 +404,13 @@ const CONFIGS = {
   "mjs-override": (options = {}) => {
     const {
       files = ["**/*.mjs"],
+      ignores = [],
     } = options
 
     return {
       name: "gesslar/uglier/mjs-override",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         sourceType: "module",
         ecmaVersion: 2021
@@ -411,12 +427,14 @@ const CONFIGS = {
   "tauri": (options = {}) => {
     const {
       files = ["src/**/*.{js,mjs,cjs}"],
+      ignores = [],
       additionalGlobals = {},
     } = options
 
     return {
       name: "gesslar/uglier/tauri",
       files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
       languageOptions: {
         globals: {
           ...globals.browser,
