@@ -47,7 +47,10 @@ npx @gesslar/uglier add react
 
 This automatically installs `@gesslar/uglier`, `eslint`, and all dependencies.
 
-**Package Manager Support:** Automatically detects and uses your preferred package manager (npm, pnpm, yarn, or Bun). Use `pnpx`, `yarn dlx`, or `bunx` instead of `npx` - the installer will detect your choice and install packages accordingly.
+**Package Manager Support:** Automatically detects and uses your preferred
+package manager (npm, pnpm, yarn, or Bun). Use `pnpx`, `yarn dlx`, or `bunx`
+instead of `npx` - the installer will detect your choice and install packages
+accordingly.
 
 ## Usage
 
@@ -61,9 +64,9 @@ import uglify from "@gesslar/uglier"
 export default [
   ...uglify({
     with: [
-      "lints-js",      // default files: ["**/*.{js,mjs,cjs}"]
-      "lints-jsdoc",   // default files: ["**/*.{js,mjs,cjs}"]
-      "node",          // default files: ["**/*.{js,mjs,cjs}"]
+      "lints-js",      // default files: ["src/**/*.{js,mjs,cjs}"]
+      "lints-jsdoc",   // default files: ["src/**/*.{js,mjs,cjs}"]
+      "node",          // default files: ["src/**/*.{js,mjs,cjs}"]
     ]
   })
 ]
@@ -97,7 +100,7 @@ export default [
 export default [
   ...uglify({
     with: ["lints-js", "node", "web"],
-    overrides: {
+    options: {
       "node": { files: ["server/**/*.js"] },
       "web": { files: ["client/**/*.js"] }
     }
@@ -111,7 +114,7 @@ export default [
 export default [
   ...uglify({
     with: ["lints-js"],
-    overrides: {
+    options: {
       "lints-js": {
         indent: 4,           // default: 2
         maxLen: 120,         // default: 80
@@ -156,7 +159,8 @@ export default [
 - **`cjs-override`** - CommonJS file handling (`.cjs`)
 - **`mjs-override`** - ES Module file handling (`.mjs`)
 
-Run `npx @gesslar/uglier --help` to see all available configs with descriptions.
+Run `npx @gesslar/uglier --help` to see all available configs with
+descriptions.
 
 ## Commands
 
@@ -177,7 +181,7 @@ npx @gesslar/uglier add tauri vscode-extension  # Multiple targets
 # Remove config blocks from existing eslint.config.js
 npx @gesslar/uglier remove react
 npx @gesslar/uglier remove web tauri  # Multiple targets
-# Note: Also removes any overrides for removed targets
+# Note: Also removes any options for removed targets
 
 # Show available configs
 npx @gesslar/uglier --help
@@ -206,7 +210,8 @@ yarn add -D @gesslar/uglier eslint
 bun add -d @gesslar/uglier eslint
 ```
 
-Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are bundled as dependencies.
+Note: `@stylistic/eslint-plugin`, `eslint-plugin-jsdoc`, and `globals` are
+bundled as dependencies.
 
 ## Development
 
@@ -227,11 +232,25 @@ This config enforces:
 
 - **Readable spacing** - Blank lines between control structures
 - **Consistent style** - Double quotes, no semicolons, 2-space indent
-- **Flexible customization** - Override anything via the `overrides` option
-- **Composability** - Mix configs for different file patterns in the same project
+- **Flexible customization** - Override anything via the `options` key
+- **Composability** - Mix configs for different file patterns in the same
+  project
 
-It's opinionated, but you can override any rule. The defaults just happen to be correct. 😉
+It's opinionated, but you can override any rule. The defaults just happen to be
+correct. 😉
 
 ## License
 
 [Unlicense](https://unlicense.org/) - Public domain. Do whatever you want.
+
+## Post Chips Ahoy
+
+If you love code and want to support it, you should write code or hug a coder,
+but maybe not physically, just emotionally, because they're busy, or instead of
+telling the coder to go out and touch grass, maybe go out and touch the grass
+for them and then come back and not tell them about it because first, charity
+for charity's sake is its own reward and how dare you to try to cash in on your
+good deeds when the entire point of doing the good deed is ... ok so, if you're
+_not_ a coder, this is called recursion; but the better reason is, as stated,
+they're busy. So, thanks. At the very least you can put it in Workday and claim
+it, you good-deed profiteer.
