@@ -9,7 +9,7 @@ export default [
       "web",
       "react",
     ],
-    overrides: {
+    options: {
       "node": {
         files: ["server/**/*.js"]
       },

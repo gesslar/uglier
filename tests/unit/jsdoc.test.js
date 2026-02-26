@@ -105,7 +105,7 @@ describe("JSDoc Configuration", () => {
     it("should allow rule overrides", () => {
       const configs = uglier({
         with: ["lints-jsdoc"],
-        overrides: {
+        options: {
           "lints-jsdoc": {
             overrides: {
               "jsdoc/valid-types": "warn"
@@ -123,7 +123,7 @@ describe("JSDoc Configuration", () => {
     it("should preserve settings when rules are overridden", () => {
       const configs = uglier({
         with: ["lints-jsdoc"],
-        overrides: {
+        options: {
           "lints-jsdoc": {
             overrides: {
               "jsdoc/valid-types": "warn"

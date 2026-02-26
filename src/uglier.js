@@ -23,7 +23,7 @@
  * export default [
  *   ...uglify({
  *     with: ["lints-js", "lints-jsdoc", "tauri"],
- *     overrides: {
+ *     options: {
  *       "lints-js": { files: ["src/**\/*.js"] },
  *       "tauri": { files: ["src/**\/*.js"] }
  *     }
@@ -48,7 +48,7 @@
  * export default [
  *   ...uglify({
  *     with: ["lints-js"],
- *     overrides: {
+ *     options: {
  *       "lints-js": {
  *         indent: 4,
  *         maxLen: 120,
@@ -208,7 +208,7 @@ const CONFIGS = {
    */
   "lints-jsdoc": (options = {}) => {
     const {
-      files = ["**/*.{js,mjs,cjs}"],
+      files = ["src/**/*.{js,mjs,cjs}"],
       ignores = [],
       overrides = {},
     } = options
@@ -324,7 +324,7 @@ const CONFIGS = {
    */
   "node": (options = {}) => {
     const {
-      files = ["**/*.{js,mjs,cjs}"],
+      files = ["src/**/*.{js,mjs,cjs}"],
       ignores = [],
       additionalGlobals = {},
     } = options
@@ -453,14 +453,14 @@ const CONFIGS = {
  * @param {object} options - Composition options
  * @param {string[]} [options.with] - Config names to include
  * @param {string[]} [options.without] - Config names to exclude (higher precedence)
- * @param {object} [options.overrides] - Per-config options overrides
+ * @param {object} [options.options] - Per-config options
  * @returns {Array} ESLint flat config array
  */
 export default function(options = {}) {
   const {
     with: includeConfigs = ["lints-js", "lints-jsdoc"],
     without: excludeConfigs = [],
-    overrides = {},
+    options: perConfigOptions = {},
   } = options
 
   const configs = []
@@ -476,7 +476,7 @@ export default function(options = {}) {
       )
     }
 
-    const configOptions = overrides[configName] || {}
+    const configOptions = perConfigOptions[configName] || {}
     const config = CONFIGS[configName](configOptions)
 
     configs.push(config)

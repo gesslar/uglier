@@ -15,7 +15,7 @@ export default [
       "react", // React + JSX support
     ], // Trailing comment after with array
     // Comment between properties
-    overrides: {
+    options: {
       // Override for Node
       "node": {
         files: ["server/**/*.js", "api/**/*.js"],
