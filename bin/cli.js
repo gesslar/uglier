@@ -117,15 +117,13 @@ export async function getAvailableConfigs() {
 
     let uglierFile = null
 
-    if(await localSource.exists) {
+    if(await localSource.exists)
       uglierFile = localSource
-    } else if(await installedSource.exists) {
+    else if(await installedSource.exists)
       uglierFile = installedSource
-    }
 
-    if(!uglierFile) {
+    if(!uglierFile)
       return null
-    }
 
     const source = await uglierFile.read()
 
@@ -162,6 +160,7 @@ export async function install() {
 
   console.log(c`{F244}Using package manager: ${manager}{/}`)
   console.log(c`{F244}Running: ${fullCmd}{/}`)
+
   exec(fullCmd)
 
   console.log()

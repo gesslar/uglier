@@ -49,14 +49,14 @@
   },
   "dependencies": {
     "@gesslar/colours": ">=0.8.0",
-    "@gesslar/toolkit": ">=3.37.0",
+    "@gesslar/toolkit": ">=3.42.0",
     "@skarab/detect-package-manager": ">=1.0.0",
     "@stylistic/eslint-plugin": "^5.9.0",
-    "eslint-plugin-jsdoc": ">=62.6.1",
+    "eslint-plugin-jsdoc": ">=62.7.1",
     "globals": ">=17.3.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=1.4.1",
-    "eslint": ">=10.0.0"
+    "@gesslar/uglier": ">=1.6.2",
+    "eslint": ">=10.0.2"
   }
 }
