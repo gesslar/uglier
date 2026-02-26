@@ -394,7 +394,7 @@ export async function addToConfig(targets = []) {
  * Remove config blocks from existing eslint.config.js
  *
  * @param {Array<string>} targets - Target environments to remove (node, web, react, etc.)
- * @returns {Promise<{success: boolean, removedTargets: Array<string>, removedOverrides: Array<string>}>} Result info
+ * @returns {Promise<{success: boolean, removedTargets: Array<string>, removedOptions: Array<string>}>} Result info
  */
 export async function removeFromConfig(targets = []) {
   const cwd = DirectoryObject.fromCwd()
@@ -404,7 +404,7 @@ export async function removeFromConfig(targets = []) {
     console.log(c`{F214}Error:{/} {<B}eslint.config.js{B>} not found`)
     console.log(c`Use {<B}npx @gesslar/uglier init <targets>{B>} to create one first`)
 
-    return {success: false, removedTargets: [], removedOverrides: []}
+    return {success: false, removedTargets: [], removedOptions: []}
   }
 
   // Get available configs dynamically
@@ -422,7 +422,7 @@ export async function removeFromConfig(targets = []) {
     console.log()
     console.log(c`{F244}Example: npx @gesslar/uglier remove react{/}`)
 
-    return {success: false, removedTargets: [], removedOverrides: []}
+    return {success: false, removedTargets: [], removedOptions: []}
   }
 
   // Read existing config
@@ -435,7 +435,7 @@ export async function removeFromConfig(targets = []) {
     console.log(c`{F214}Error:{/} Could not parse existing config`)
     console.log(c`The config file may have a non-standard format`)
 
-    return {success: false, removedTargets: [], removedOverrides: []}
+    return {success: false, removedTargets: [], removedOptions: []}
   }
 
   // Find which targets exist and can be removed
@@ -451,7 +451,7 @@ export async function removeFromConfig(targets = []) {
     console.log()
     console.log(c`Current targets: ${existingTargets.map(t => c`{F070}${t}{/}`).join(", ")}`)
 
-    return {success: false, removedTargets: [], removedOverrides: []}
+    return {success: false, removedTargets: [], removedOptions: []}
   }
 
   // Build new with array content without the removed targets
@@ -488,11 +488,11 @@ export async function removeFromConfig(targets = []) {
     `with: [\n${newLines.join("\n")}\n    ]`
   )
 
-  // Check for and remove overrides for removed targets
-  const removedOverrides = []
-  const overridesMatch = newContent.match(/overrides:\s*\{/m)
+  // Check for and remove options for removed targets
+  const removedOptions = []
+  const optionsMatch = newContent.match(/options:\s*\{/m)
 
-  if(overridesMatch) {
+  if(optionsMatch) {
     for(const target of targetsToRemove) {
       // Find the start of this target's override entry
       const targetPattern = new RegExp(`[\\s,]*(?:\\/\\/[^\\n]*\\n\\s*)?["']${target}["']:\\s*\\{`)
@@ -524,7 +524,7 @@ export async function removeFromConfig(targets = []) {
         }
 
         if(blockEnd !== -1) {
-          removedOverrides.push(target)
+        removedOptions.push(target)
           newContent = newContent.slice(0, blockStart)
             + newContent.slice(blockEnd)
         }
@@ -536,9 +536,9 @@ export async function removeFromConfig(targets = []) {
       /\}(\s*["'][\w-]+["']:\s*\{)/g, "},$1"
     )
 
-    // Clean up empty overrides object or trailing commas
+    // Clean up empty options object or trailing commas
     newContent = newContent.replace(
-      /overrides:\s*\{\s*,?\s*\}/m, ""
+      /options:\s*\{\s*,?\s*\}/m, ""
     )
     newContent = newContent.replace(/,(\s*)\}/g, "$1}")
   }
@@ -553,11 +553,11 @@ export async function removeFromConfig(targets = []) {
     console.log(c`  {F070}•{/} ${target}`)
   }
 
-  if(removedOverrides.length > 0) {
+  if(removedOptions.length > 0) {
     console.log()
-    console.log(c`{F039}Also removed overrides for:{/}`)
+    console.log(c`{F039}Also removed options for:{/}`)
 
-    for(const target of removedOverrides) {
+    for(const target of removedOptions) {
       console.log(c`  {F070}•{/} ${target}`)
     }
   }
@@ -567,7 +567,7 @@ export async function removeFromConfig(targets = []) {
   console.log()
   console.log(c`{F244}Run {<B}${eslintCmd}{B>} to lint your project{/}`)
 
-  return {success: true, removedTargets: targetsToRemove, removedOverrides}
+  return {success: true, removedTargets: targetsToRemove, removedOptions}
 }
 
 /**

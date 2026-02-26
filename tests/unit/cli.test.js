@@ -283,8 +283,8 @@ describe("CLI Functions", () => {
       assert.equal(result.success, false)
     })
 
-    it("should remove overrides for removed targets", async() => {
-      // Copy config with overrides
+    it("should remove options for removed targets", async() => {
+      // Copy config with options
       await cp(
         join(FIXTURES_DIR, "config-with-overrides.js"),
         join(TEST_DIR, "eslint.config.js")
@@ -293,7 +293,7 @@ describe("CLI Functions", () => {
       const result = await removeFromConfig(["react"])
 
       assert.equal(result.success, true)
-      assert.equal(result.removedOverrides.includes("react"), true)
+      assert.equal(result.removedOptions.includes("react"), true)
 
       const configPath = join(TEST_DIR, "eslint.config.js")
       const content = await readFile(configPath, "utf-8")

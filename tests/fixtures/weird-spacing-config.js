@@ -11,7 +11,7 @@ export default [
         "react",    // because why not
       ]
     ,
-    overrides:
+    options:
     {
       "node":
       {

@@ -80,12 +80,12 @@ describe("Edge Cases", () => {
       assert.equal(result, false)
     })
 
-    it("should remove from messy config and clean overrides", async() => {
+    it("should remove from messy config and clean options", async() => {
       const result = await removeFromConfig(["react"])
 
       assert.equal(result.success, true)
       assert.equal(result.removedTargets.includes("react"), true)
-      assert.equal(result.removedOverrides.includes("react"), true)
+      assert.equal(result.removedOptions.includes("react"), true)
 
       const configPath = join(TEST_DIR, "eslint.config.js")
       const content = await readFile(configPath, "utf-8")
@@ -102,12 +102,12 @@ describe("Edge Cases", () => {
       await importGeneratedConfig(configPath)
     })
 
-    it("should handle removing multiple targets with overrides", async() => {
+    it("should handle removing multiple targets with options", async() => {
       const result = await removeFromConfig(["node", "react"])
 
       assert.equal(result.success, true)
       assert.deepEqual(result.removedTargets.sort(), ["node", "react"])
-      assert.deepEqual(result.removedOverrides.sort(), ["node", "react"])
+      assert.deepEqual(result.removedOptions.sort(), ["node", "react"])
 
       const configPath = join(TEST_DIR, "eslint.config.js")
       const content = await readFile(configPath, "utf-8")
@@ -212,7 +212,7 @@ describe("Edge Cases", () => {
       const result = await removeFromConfig(["react"])
 
       assert.equal(result.success, true)
-      assert.equal(result.removedOverrides.includes("react"), true)
+      assert.equal(result.removedOptions.includes("react"), true)
 
       const configPath = join(TEST_DIR, "eslint.config.js")
       const content = await readFile(configPath, "utf-8")
@@ -285,11 +285,11 @@ describe("Edge Cases", () => {
       await importGeneratedConfig(configPath)
     })
 
-    it("should clean overrides with mixed quotes", async() => {
+    it("should clean options with mixed quotes", async() => {
       const result = await removeFromConfig(["node"])
 
       assert.equal(result.success, true)
-      assert.equal(result.removedOverrides.includes("node"), true)
+      assert.equal(result.removedOptions.includes("node"), true)
 
       const configPath = join(TEST_DIR, "eslint.config.js")
       const content = await readFile(configPath, "utf-8")

@@ -7,7 +7,7 @@ export default [
       "node", // default files: ["**/*.{js,mjs,cjs}"]
       "react", // default files: ["**/*.{js,jsx,mjs,cjs}"]
     ],
-    overrides: {
+    options: {
       "react": {
         files: ["client/**/*.js"]
       },
