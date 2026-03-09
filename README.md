@@ -239,10 +239,6 @@ This config enforces:
 It's opinionated, but you can override any rule. The defaults just happen to be
 correct. 😉
 
-## License
-
-[Unlicense](https://unlicense.org/) - Public domain. Do whatever you want.
-
 ## Post Chips Ahoy
 
 If you love code and want to support it, you should write code or hug a coder,
@@ -254,3 +250,20 @@ good deeds when the entire point of doing the good deed is ... ok so, if you're
 _not_ a coder, this is called recursion; but the better reason is, as stated,
 they're busy. So, thanks. At the very least you can put it in Workday and claim
 it, you good-deed profiteer.
+
+## License
+
+uglier is released into the public domain under the
+[Unlicense](UNLICENSE.txt).
+
+This package includes or depends on third-party components under their own
+licenses:
+
+| Dependency | License |
+| --- | --- |
+| [@gesslar/colours](https://github.com/gesslar/colours) | Unlicense |
+| [@gesslar/toolkit](https://github.com/gesslar/toolkit) | Unlicense |
+| [@skarab/detect-package-manager](https://github.com/skarab42/detect-package-manager) | MIT |
+| [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) | MIT |
+| [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc) | BSD-3-Clause |
+| [globals](https://github.com/sindresorhus/globals) | MIT |
