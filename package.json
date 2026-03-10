@@ -5,7 +5,7 @@
     "name": "gesslar",
     "url": "https://gesslar.dev"
   },
-  "version": "2.0.1",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
@@ -39,7 +39,7 @@
   ],
   "scripts": {
     "test": "node --test tests/unit/*.test.js",
-    "types:build": "tsc",
+    "types": "node -e \"require('fs').rmSync('types',{recursive:true,force:true});\" && tsc -p tsconfig.types.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "update": "npx npm-check-updates -u && npm install",
