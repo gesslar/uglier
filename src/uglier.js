@@ -74,22 +74,114 @@
  * - mjs-override: ES Module file handling (.mjs files)
  */
 
+/**
+ * Available config block names
+ *
+ * @typedef {"lints-js" | "lints-jsdoc" | "languageOptions" | "web" | "node" | "react" | "tauri" | "vscode-extension" | "cjs-override" | "mjs-override"} ConfigName
+ */
+
+/**
+ * ESLint rule severity or configuration
+ *
+ * @typedef {("off" | "warn" | "error" | 0 | 1 | 2 | [("off" | "warn" | "error" | 0 | 1 | 2), ...Array<string | number | boolean | object>])} RuleEntry
+ */
+
+/**
+ * ESLint rule overrides map
+ *
+ * @typedef {{[ruleName: string]: RuleEntry}} RuleOverrides
+ */
+
+/**
+ * Options for the lints-js config block
+ *
+ * @typedef {object} LintsJsOptions
+ * @property {string | Array<string>} [files] - Glob patterns for files to lint
+ * @property {string | Array<string>} [ignores] - Glob patterns for files to ignore
+ * @property {number} [indent] - Indentation width (default: 2)
+ * @property {number} [maxLen] - Maximum line length (default: 80)
+ * @property {RuleOverrides} [overrides] - ESLint rule overrides
+ */
+
+/**
+ * Options for the lints-jsdoc config block
+ *
+ * @typedef {object} LintsJsdocOptions
+ * @property {string | Array<string>} [files] - Glob patterns for files to lint
+ * @property {string | Array<string>} [ignores] - Glob patterns for files to ignore
+ * @property {RuleOverrides} [overrides] - ESLint rule overrides
+ */
+
+/**
+ * Options for the languageOptions config block
+ *
+ * @typedef {object} LanguageOptionsOptions
+ * @property {string | number} [ecmaVersion] - ECMAScript version (default: "latest")
+ * @property {"module" | "script" | "commonjs"} [sourceType] - Source type (default: "module")
+ * @property {{[name: string]: "readonly" | "writable" | "off"}} [additionalGlobals] - Extra global variables
+ */
+
+/**
+ * Options for environment config blocks (web, node, react, tauri, vscode-extension)
+ *
+ * @typedef {object} EnvironmentOptions
+ * @property {string | Array<string>} [files] - Glob patterns for files to lint
+ * @property {string | Array<string>} [ignores] - Glob patterns for files to ignore
+ * @property {{[name: string]: "readonly" | "writable" | "off"}} [additionalGlobals] - Extra global variables
+ */
+
+/**
+ * Options for module override config blocks (cjs-override, mjs-override)
+ *
+ * @typedef {object} ModuleOverrideOptions
+ * @property {string | Array<string>} [files] - Glob patterns for files to lint
+ * @property {string | Array<string>} [ignores] - Glob patterns for files to ignore
+ */
+
+/**
+ * Per-config options map
+ *
+ * @typedef {{"lints-js"?: LintsJsOptions, "lints-jsdoc"?: LintsJsdocOptions, languageOptions?: LanguageOptionsOptions, web?: EnvironmentOptions, node?: EnvironmentOptions, react?: EnvironmentOptions, tauri?: EnvironmentOptions, "vscode-extension"?: EnvironmentOptions, "cjs-override"?: ModuleOverrideOptions, "mjs-override"?: ModuleOverrideOptions}} PerConfigOptions
+ */
+
+/**
+ * Options for composing ESLint configurations
+ *
+ * @typedef {object} UglierOptions
+ * @property {Array<ConfigName>} [with] - Config names to include (default: ["lints-js", "lints-jsdoc"])
+ * @property {Array<ConfigName>} [without] - Config names to exclude (higher precedence than `with`)
+ * @property {PerConfigOptions} [options] - Per-config options
+ */
+
+/**
+ * An ESLint flat config object
+ *
+ * @typedef {object} FlatConfig
+ * @property {string} [name] - Config name for debugging
+ * @property {Array<string>} [files] - Glob patterns for files this config applies to
+ * @property {Array<string>} [ignores] - Glob patterns for files to ignore
+ * @property {{[pluginName: string]: object}} [plugins] - ESLint plugins
+ * @property {{[ruleName: string]: RuleEntry}} [rules] - ESLint rules
+ * @property {object} [languageOptions] - Language options
+ * @property {object} [settings] - Shared settings
+ */
+
 import jsdoc from "eslint-plugin-jsdoc"
 import stylistic from "@stylistic/eslint-plugin"
 import globals from "globals"
 
 /**
- * Registry of named configuration blocks
- * Each config is a factory function that returns an ESLint config object
+ * Registry of named configuration blocks.
+ * Each config is a factory function that returns an ESLint flat config object.
  *
- * @type {{[key: string]: Function}}
+ * @type {{[K in ConfigName]: (options?: object) => FlatConfig}}
  */
 const CONFIGS = {
   /**
    * Core stylistic linting rules
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {LintsJsOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "lints-js": (options = {}) => {
     const {
@@ -195,6 +287,7 @@ const CONFIGS = {
         "prefer-const": "error",
         "@stylistic/no-multiple-empty-lines": ["error", {max: 1}],
         "@stylistic/array-bracket-spacing": ["error", "never"],
+        "@stylistic/no-extra-semi": "error",
         ...overrides,
       }
     }
@@ -203,8 +296,8 @@ const CONFIGS = {
   /**
    * JSDoc linting rules
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {LintsJsdocOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "lints-jsdoc": (options = {}) => {
     const {
@@ -244,8 +337,8 @@ const CONFIGS = {
   /**
    * Language options configuration
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {LanguageOptionsOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "languageOptions": (options = {}) => {
     const {
@@ -267,8 +360,8 @@ const CONFIGS = {
   /**
    * Browser/web globals configuration
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "web": (options = {}) => {
     const {
@@ -293,8 +386,8 @@ const CONFIGS = {
   /**
    * VSCode extension globals
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "vscode-extension": (options = {}) => {
     const {
@@ -319,8 +412,8 @@ const CONFIGS = {
   /**
    * Node.js globals
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "node": (options = {}) => {
     const {
@@ -347,8 +440,8 @@ const CONFIGS = {
   /**
    * React application globals
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "react": (options = {}) => {
     const {
@@ -375,8 +468,8 @@ const CONFIGS = {
   /**
    * CommonJS file override
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {ModuleOverrideOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "cjs-override": (options = {}) => {
     const {
@@ -398,8 +491,8 @@ const CONFIGS = {
   /**
    * ES Module file override
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {ModuleOverrideOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "mjs-override": (options = {}) => {
     const {
@@ -421,8 +514,8 @@ const CONFIGS = {
   /**
    * Tauri application configuration (browser + Tauri APIs, no Node.js)
    *
-   * @param {object} options - Configuration options
-   * @returns {object} Config object
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
    */
   "tauri": (options = {}) => {
     const {
@@ -450,11 +543,8 @@ const CONFIGS = {
 /**
  * Compose ESLint configuration from named config blocks
  *
- * @param {object} options - Composition options
- * @param {string[]} [options.with] - Config names to include
- * @param {string[]} [options.without] - Config names to exclude (higher precedence)
- * @param {object} [options.options] - Per-config options
- * @returns {Array} ESLint flat config array
+ * @param {UglierOptions} [options] - Composition options
+ * @returns {Array<FlatConfig>} ESLint flat config array
  */
 export default function(options = {}) {
   const {
@@ -486,6 +576,9 @@ export default function(options = {}) {
 }
 
 /**
- * Export all available config names for reference
+ * All available config block names
+ *
+ * @type {Array<ConfigName>}
  */
-export const availableConfigs = Object.keys(CONFIGS)
+export const availableConfigs =
+  /** @type {Array<ConfigName>} */ (Object.keys(CONFIGS))

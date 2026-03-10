@@ -11,7 +11,12 @@
     "url": "git+https://github.com/gesslar/uglier.git"
   },
   "type": "module",
-  "exports": "./src/uglier.js",
+  "exports": {
+    ".": {
+      "types": "./src/types/uglier.d.ts",
+      "default": "./src/uglier.js"
+    }
+  },
   "bin": {
     "uglier": "./src/install.js"
   },
@@ -34,6 +39,7 @@
   ],
   "scripts": {
     "test": "node --test tests/unit/*.test.js",
+    "types:build": "tsc",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "update": "npx npm-check-updates -u && npm install",
@@ -56,7 +62,8 @@
     "globals": ">=17.4.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=2.0.0",
-    "eslint": ">=10.0.3"
+    "@gesslar/uglier": ">=2.0.1",
+    "eslint": ">=10.0.3",
+    "typescript": "^5.9.3"
   }
 }
