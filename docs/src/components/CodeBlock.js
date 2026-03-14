@@ -36,7 +36,7 @@ export default function CodeBlock({lang, label, children}) {
 
   return (
     <>
-      {displayLabel && <small class="fenced-label">{displayLabel}</small>}
+      {displayLabel && <small className="fenced-label">{displayLabel}</small>}
       <BaseCodeBlock language={lang}>{children}</BaseCodeBlock>
     </>
   )
