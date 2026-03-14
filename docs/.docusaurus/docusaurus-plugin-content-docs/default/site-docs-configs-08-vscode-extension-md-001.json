@@ -1,0 +1,27 @@
+{
+  "id": "configs/vscode-extension",
+  "title": "vscode-extension",
+  "description": "See the source",
+  "source": "@site/docs/configs/08-vscode-extension.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/vscode-extension",
+  "permalink": "/docs/configs/vscode-extension",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/08-vscode-extension.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 8,
+  "frontMatter": {
+    "sidebar_label": "vscode-extension"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "tauri",
+    "permalink": "/docs/configs/tauri"
+  },
+  "next": {
+    "title": "cjs-override",
+    "permalink": "/docs/configs/cjs-override"
+  }
+}

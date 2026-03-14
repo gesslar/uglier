@@ -1,0 +1,27 @@
+{
+  "id": "nerds/lints-jsdoc",
+  "title": "lints-jsdoc",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/02-lints-jsdoc.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/lints-jsdoc",
+  "permalink": "/docs/nerds/lints-jsdoc",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/02-lints-jsdoc.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_label": "lints-jsdoc"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "lints-js",
+    "permalink": "/docs/nerds/lints-js"
+  },
+  "next": {
+    "title": "languageOptions",
+    "permalink": "/docs/nerds/languageOptions"
+  }
+}

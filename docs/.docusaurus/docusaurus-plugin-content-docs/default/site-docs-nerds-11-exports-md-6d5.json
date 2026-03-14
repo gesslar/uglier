@@ -1,0 +1,23 @@
+{
+  "id": "nerds/exports",
+  "title": "exports",
+  "description": "The main export function and availableConfigs, extracted from src/uglier.js.",
+  "source": "@site/docs/nerds/11-exports.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/exports",
+  "permalink": "/docs/nerds/exports",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/11-exports.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 11,
+  "frontMatter": {
+    "sidebar_label": "exports"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "tauri",
+    "permalink": "/docs/nerds/tauri"
+  }
+}

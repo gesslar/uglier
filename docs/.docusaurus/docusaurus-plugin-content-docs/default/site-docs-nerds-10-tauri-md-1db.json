@@ -1,0 +1,27 @@
+{
+  "id": "nerds/tauri",
+  "title": "tauri",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/10-tauri.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/tauri",
+  "permalink": "/docs/nerds/tauri",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/10-tauri.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "sidebar_label": "tauri"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "mjs-override",
+    "permalink": "/docs/nerds/mjs-override"
+  },
+  "next": {
+    "title": "exports",
+    "permalink": "/docs/nerds/exports"
+  }
+}

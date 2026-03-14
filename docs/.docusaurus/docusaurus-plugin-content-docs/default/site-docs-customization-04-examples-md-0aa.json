@@ -1,0 +1,23 @@
+{
+  "id": "customization/examples",
+  "title": "Examples",
+  "description": "Real-world configuration examples for common project setups.",
+  "source": "@site/docs/customization/04-examples.md",
+  "sourceDirName": "customization",
+  "slug": "/customization/examples",
+  "permalink": "/docs/customization/examples",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/customization/04-examples.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 4,
+  "frontMatter": {
+    "sidebar_label": "Examples"
+  },
+  "sidebar": "customizationSidebar",
+  "previous": {
+    "title": "Rule Overrides",
+    "permalink": "/docs/customization/overrides"
+  }
+}

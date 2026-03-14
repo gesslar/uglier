@@ -1,0 +1,27 @@
+{
+  "id": "nerds/vscode-extension",
+  "title": "vscode-extension",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/05-vscode-extension.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/vscode-extension",
+  "permalink": "/docs/nerds/vscode-extension",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/05-vscode-extension.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_label": "vscode-extension"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "web",
+    "permalink": "/docs/nerds/web"
+  },
+  "next": {
+    "title": "node",
+    "permalink": "/docs/nerds/node"
+  }
+}

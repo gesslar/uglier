@@ -1,0 +1,27 @@
+{
+  "id": "configs/lints-jsdoc",
+  "title": "lints-jsdoc",
+  "description": "See the source",
+  "source": "@site/docs/configs/02-lints-jsdoc.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/lints-jsdoc",
+  "permalink": "/docs/configs/lints-jsdoc",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/02-lints-jsdoc.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_label": "lints-jsdoc"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "lints-js",
+    "permalink": "/docs/configs/lints-js"
+  },
+  "next": {
+    "title": "languageOptions",
+    "permalink": "/docs/configs/language-options"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "nerds/languageOptions",
+  "title": "languageOptions",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/03-languageOptions.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/languageOptions",
+  "permalink": "/docs/nerds/languageOptions",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/03-languageOptions.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_label": "languageOptions"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "lints-jsdoc",
+    "permalink": "/docs/nerds/lints-jsdoc"
+  },
+  "next": {
+    "title": "web",
+    "permalink": "/docs/nerds/web"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "quick-start/installation",
+  "title": "Installation",
+  "description": "The fastest way to get started is with the uglier CLI. It installs the package and all required peer dependencies automatically.",
+  "source": "@site/docs/quick-start/02-installation.md",
+  "sourceDirName": "quick-start",
+  "slug": "/quick-start/installation",
+  "permalink": "/docs/quick-start/installation",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/quick-start/02-installation.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_label": "Installation"
+  },
+  "sidebar": "quickStartSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/docs/quick-start/intro"
+  },
+  "next": {
+    "title": "Initialize Config",
+    "permalink": "/docs/quick-start/init"
+  }
+}

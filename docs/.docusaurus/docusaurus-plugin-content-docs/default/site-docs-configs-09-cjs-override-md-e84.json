@@ -1,0 +1,27 @@
+{
+  "id": "configs/cjs-override",
+  "title": "cjs-override",
+  "description": "See the source",
+  "source": "@site/docs/configs/09-cjs-override.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/cjs-override",
+  "permalink": "/docs/configs/cjs-override",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/09-cjs-override.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 9,
+  "frontMatter": {
+    "sidebar_label": "cjs-override"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "vscode-extension",
+    "permalink": "/docs/configs/vscode-extension"
+  },
+  "next": {
+    "title": "mjs-override",
+    "permalink": "/docs/configs/mjs-override"
+  }
+}

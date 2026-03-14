@@ -1,0 +1,27 @@
+{
+  "id": "nerds/cjs-override",
+  "title": "cjs-override",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/08-cjs-override.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/cjs-override",
+  "permalink": "/docs/nerds/cjs-override",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/08-cjs-override.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 8,
+  "frontMatter": {
+    "sidebar_label": "cjs-override"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "react",
+    "permalink": "/docs/nerds/react"
+  },
+  "next": {
+    "title": "mjs-override",
+    "permalink": "/docs/nerds/mjs-override"
+  }
+}
