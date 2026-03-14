@@ -48,7 +48,6 @@ const config = {
       ({
         docs: {
           sidebarPath: "./sidebars.js",
-          editUrl: "https://github.com/gesslar/uglier/tree/main/docs/",
         },
         blog: false,
         theme: {
