@@ -1,0 +1,23 @@
+{
+  "id": "configs/lints-js",
+  "title": "lints-js",
+  "description": "See the source",
+  "source": "@site/docs/configs/01-lints-js.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/lints-js",
+  "permalink": "/docs/configs/lints-js",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/01-lints-js.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_label": "lints-js"
+  },
+  "sidebar": "configsSidebar",
+  "next": {
+    "title": "lints-jsdoc",
+    "permalink": "/docs/configs/lints-jsdoc"
+  }
+}

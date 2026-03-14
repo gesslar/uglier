@@ -1,0 +1,23 @@
+{
+  "id": "configs/mjs-override",
+  "title": "mjs-override",
+  "description": "See the source",
+  "source": "@site/docs/configs/10-mjs-override.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/mjs-override",
+  "permalink": "/docs/configs/mjs-override",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/10-mjs-override.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "sidebar_label": "mjs-override"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "cjs-override",
+    "permalink": "/docs/configs/cjs-override"
+  }
+}

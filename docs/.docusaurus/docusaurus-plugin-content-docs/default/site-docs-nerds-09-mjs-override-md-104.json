@@ -1,0 +1,27 @@
+{
+  "id": "nerds/mjs-override",
+  "title": "mjs-override",
+  "description": "Back to config docs",
+  "source": "@site/docs/nerds/09-mjs-override.md",
+  "sourceDirName": "nerds",
+  "slug": "/nerds/mjs-override",
+  "permalink": "/docs/nerds/mjs-override",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/nerds/09-mjs-override.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 9,
+  "frontMatter": {
+    "sidebar_label": "mjs-override"
+  },
+  "sidebar": "nerdsSidebar",
+  "previous": {
+    "title": "cjs-override",
+    "permalink": "/docs/nerds/cjs-override"
+  },
+  "next": {
+    "title": "tauri",
+    "permalink": "/docs/nerds/tauri"
+  }
+}

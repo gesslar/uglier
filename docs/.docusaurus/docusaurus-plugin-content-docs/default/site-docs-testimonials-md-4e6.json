@@ -1,0 +1,18 @@
+{
+  "id": "testimonials",
+  "title": "Testimonials",
+  "description": "\"I used to configure 200 ESLint rules by hand. Now I configure 0. My therapist says I need a new hobby.\"",
+  "source": "@site/docs/testimonials.md",
+  "sourceDirName": ".",
+  "slug": "/testimonials",
+  "permalink": "/docs/testimonials",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/testimonials.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {
+    "sidebar_label": "Testimonials",
+    "hide_table_of_contents": true
+  }
+}

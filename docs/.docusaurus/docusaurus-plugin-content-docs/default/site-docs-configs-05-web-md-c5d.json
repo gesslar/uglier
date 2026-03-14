@@ -1,0 +1,27 @@
+{
+  "id": "configs/web",
+  "title": "web",
+  "description": "See the source",
+  "source": "@site/docs/configs/05-web.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/web",
+  "permalink": "/docs/configs/web",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/05-web.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 5,
+  "frontMatter": {
+    "sidebar_label": "web"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "node",
+    "permalink": "/docs/configs/node"
+  },
+  "next": {
+    "title": "react",
+    "permalink": "/docs/configs/react"
+  }
+}

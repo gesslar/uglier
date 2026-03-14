@@ -1,0 +1,23 @@
+{
+  "id": "reference/types",
+  "title": "Type Definitions",
+  "description": "uglier ships with TypeScript definitions generated from JSDoc. These provide full autocomplete and type checking in your editor.",
+  "source": "@site/docs/reference/03-types.md",
+  "sourceDirName": "reference",
+  "slug": "/reference/types",
+  "permalink": "/docs/reference/types",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/reference/03-types.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_label": "Types"
+  },
+  "sidebar": "referenceSidebar",
+  "previous": {
+    "title": "CLI",
+    "permalink": "/docs/reference/cli"
+  }
+}

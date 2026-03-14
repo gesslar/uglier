@@ -1,11 +1,14 @@
+/** @type {import("@gesslar/uglier").UglierOptions} */
+
 import uglify from "@gesslar/uglier"
 
 export default [
+  {ignores: ["docs/**"]},
   ...uglify({
     with: [
-      "lints-js", // default files: ["**/*.{js,mjs,cjs}"]
-      "lints-jsdoc", // default files: ["**/*.{js,mjs,cjs}"]
-      "node", // default files: ["**/*.{js,mjs,cjs}"]
-    ]
+      "lints-js",
+      "lints-jsdoc",
+      "node",
+    ],
   })
 ]

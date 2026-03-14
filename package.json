@@ -47,7 +47,10 @@
     "pr": "gt submit -p --ai",
     "patch": "npm version patch",
     "minor": "npm version minor",
-    "major": "npm version major"
+    "major": "npm version major",
+    "docs:dev": "cd docs && npm run start",
+    "docs:build": "cd docs && npm run build",
+    "docs:deploy": "gh workflow run deploy-docs.yml"
   },
   "license": "Unlicense",
   "engines": {
@@ -58,11 +61,11 @@
     "@gesslar/toolkit": ">=4.1.0",
     "@skarab/detect-package-manager": ">=1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint-plugin-jsdoc": ">=62.7.1",
+    "eslint-plugin-jsdoc": ">=62.8.0",
     "globals": ">=17.4.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=2.0.1",
+    "@gesslar/uglier": ">=2.1.0",
     "eslint": ">=10.0.3",
     "typescript": "^5.9.3"
   }

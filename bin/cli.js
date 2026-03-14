@@ -167,7 +167,7 @@ export async function install() {
   console.log(c`{F070}✓{/} Installation successful.`)
   console.log()
   console.log(c`{F039}For detailed setup and configuration options, visit:{/}`)
-  console.log(c`https://github.com/gesslar/uglier#readme`)
+  console.log(c`https://uglier.gesslar.io`)
 }
 
 /**
@@ -585,6 +585,8 @@ export async function showHelp() {
   console.log(c`  {<B}npx @gesslar/uglier remove <targets>{B>}  Remove config blocks from existing eslint.config.js`)
   console.log(c`  {<B}npx @gesslar/uglier --help{B>}            Show this help`)
   console.log()
+  console.log(c`Learn how to bastardise the already beautiful defaults to your heart's desire at https://uglier.gesslar.io`)
+  console.log()
 
   const configs = await getAvailableConfigs()
 
@@ -600,5 +602,5 @@ export async function showHelp() {
   }
 
   console.log()
-  console.log(`Documentation at https://github.com/gesslar/uglier.`)
+  console.log(`Documentation at https://uglier.io/.`)
 }

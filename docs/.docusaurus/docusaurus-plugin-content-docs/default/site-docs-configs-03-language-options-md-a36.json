@@ -1,0 +1,27 @@
+{
+  "id": "configs/language-options",
+  "title": "languageOptions",
+  "description": "See the source",
+  "source": "@site/docs/configs/03-language-options.md",
+  "sourceDirName": "configs",
+  "slug": "/configs/language-options",
+  "permalink": "/docs/configs/language-options",
+  "draft": false,
+  "unlisted": false,
+  "editUrl": "https://github.com/gesslar/uglier/tree/main/docs/docs/configs/03-language-options.md",
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 3,
+  "frontMatter": {
+    "sidebar_label": "languageOptions"
+  },
+  "sidebar": "configsSidebar",
+  "previous": {
+    "title": "lints-jsdoc",
+    "permalink": "/docs/configs/lints-jsdoc"
+  },
+  "next": {
+    "title": "node",
+    "permalink": "/docs/configs/node"
+  }
+}
