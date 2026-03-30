@@ -241,7 +241,7 @@ const CONFIGS = {
             from: {before: true, after: true},
             async: {before: true, after: true},
             await: {before: true, after: false},
-            with: {before: true, after: false},
+            with: {before: true, after: true},
             class: {before: true, after: true},
             const: {before: true, after: true},
             let: {before: true, after: true},
