@@ -513,6 +513,61 @@ const CONFIGS = {
   },
 
   /**
+   * Docusaurus documentation site globals (browser + React + Docusaurus)
+   *
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
+   */
+  "docusaurus": (options = {}) => {
+    const {
+      files = ["src/**/*.{js,jsx,mjs,cjs}", "docs/**/*.{js,jsx,mjs,cjs}"],
+      ignores = [],
+      additionalGlobals = {},
+    } = options
+
+    return {
+      name: "gesslar/uglier/docusaurus",
+      files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+          React: "readonly",
+          ReactDOM: "readonly",
+          ...additionalGlobals,
+        }
+      }
+    }
+  },
+
+  /**
+   * Starlight documentation site globals (browser + Astro)
+   *
+   * @param {EnvironmentOptions} options - Configuration options
+   * @returns {FlatConfig} ESLint flat config object
+   */
+  "starlight": (options = {}) => {
+    const {
+      files = ["src/**/*.{js,mjs,cjs}", "docs/**/*.{js,mjs,cjs}"],
+      ignores = [],
+      additionalGlobals = {},
+    } = options
+
+    return {
+      name: "gesslar/uglier/starlight",
+      files: Array.isArray(files) ? files : [files],
+      ignores: Array.isArray(ignores) ? ignores : [ignores],
+      languageOptions: {
+        globals: {
+          ...globals.browser,
+          Astro: "readonly",
+          ...additionalGlobals,
+        }
+      }
+    }
+  },
+
+  /**
    * Tauri application configuration (browser + Tauri APIs, no Node.js)
    *
    * @param {EnvironmentOptions} options - Configuration options
