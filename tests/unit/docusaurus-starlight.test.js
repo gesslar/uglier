@@ -100,6 +100,28 @@ describe("Docusaurus Configuration", () => {
 
 describe("Starlight Configuration", () => {
   describe("starlight config", () => {
+    it("should include astro plugin configs", () => {
+      const configs = uglier({
+        with: ["starlight"]
+      })
+
+      const astroBase = configs.find(c => c.name === "astro/base")
+
+      assert.ok(astroBase, "Should include astro/base config")
+      assert.ok(astroBase.processor, "astro/base should have a processor")
+    })
+
+    it("should include astro recommended rules", () => {
+      const configs = uglier({
+        with: ["starlight"]
+      })
+
+      const astroRecommended = configs.find(c => c.name === "astro/recommended")
+
+      assert.ok(astroRecommended, "Should include astro/recommended config")
+      assert.ok(astroRecommended.rules, "Should have rules")
+    })
+
     it("should include browser globals", () => {
       const configs = uglier({
         with: ["starlight"]
@@ -110,17 +132,6 @@ describe("Starlight Configuration", () => {
       assert.ok(config, "Should have starlight config")
       assert.notEqual(config.languageOptions.globals.window, undefined, "Should have window global")
       assert.notEqual(config.languageOptions.globals.document, undefined, "Should have document global")
-    })
-
-    it("should include Astro global", () => {
-      const configs = uglier({
-        with: ["starlight"]
-      })
-
-      const config = configs.find(c => c.name === "gesslar/uglier/starlight")
-
-      assert.ok(config, "Should have starlight config")
-      assert.equal(config.languageOptions.globals.Astro, "readonly", "Should have Astro global")
     })
 
     it("should not include React globals", () => {
@@ -197,6 +208,19 @@ describe("Starlight Configuration", () => {
 
       assert.ok(config, "Should have starlight config")
       assert.deepEqual(config.ignores, ["dist/**"])
+    })
+
+    it("should produce multiple config objects", () => {
+      const configs = uglier({
+        with: ["starlight"]
+      })
+
+      assert.ok(configs.length > 1, "Should produce multiple config objects")
+
+      const names = configs.map(c => c.name).filter(Boolean)
+
+      assert.ok(names.includes("gesslar/uglier/starlight"), "Should include uglier starlight config")
+      assert.ok(names.some(n => n.startsWith("astro/")), "Should include astro plugin configs")
     })
   })
 })

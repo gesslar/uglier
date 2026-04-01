@@ -5,7 +5,7 @@
     "name": "gesslar",
     "url": "https://gesslar.dev"
   },
-  "version": "2.3.1",
+  "version": "2.4.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
@@ -61,6 +61,7 @@
     "@gesslar/toolkit": ">=4.4.0",
     "@skarab/detect-package-manager": ">=1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint-plugin-astro": "^1.6.0",
     "eslint-plugin-jsdoc": ">=62.8.1",
     "globals": ">=17.4.0"
   },

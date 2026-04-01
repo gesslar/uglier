@@ -6,19 +6,21 @@ sidebar_label: starlight
 
 > [See the source](/docs/nerds/starlight)
 
-Sets up the environment for Starlight documentation sites. Includes browser globals plus the Astro global.
+Sets up the environment for Starlight documentation sites. Includes browser globals and the full `eslint-plugin-astro` recommended configuration for `.astro` file linting.
 
-## Globals included
+## What's included
 
-Everything from the [web](/docs/configs/web) config, plus:
-
-- `Astro`
+- Browser globals
+- `eslint-plugin-astro` flat/recommended configs (parser, processor, and rules for `.astro` files)
+- `Astro` and `Fragment` globals (provided by the astro plugin)
 
 ## Default file patterns
 
 ```
 ["src/**/*.{js,mjs,cjs}", "docs/**/*.{js,mjs,cjs}"]
 ```
+
+The astro plugin configs additionally target `*.astro`, `**/*.astro/*.js`, and `**/*.astro/*.ts` files.
 
 ## Options
 
