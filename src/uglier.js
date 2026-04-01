@@ -77,7 +77,7 @@
 /**
  * Available config block names
  *
- * @typedef {"lints-js" | "lints-jsdoc" | "languageOptions" | "web" | "node" | "react" | "tauri" | "vscode-extension" | "cjs-override" | "mjs-override"} ConfigName
+ * @typedef {"lints-js" | "lints-jsdoc" | "languageOptions" | "web" | "node" | "react" | "docusaurus" | "starlight" | "tauri" | "vscode-extension" | "cjs-override" | "mjs-override"} ConfigName
  */
 
 /**
@@ -141,7 +141,7 @@
 /**
  * Per-config options map
  *
- * @typedef {{"lints-js"?: LintsJsOptions, "lints-jsdoc"?: LintsJsdocOptions, languageOptions?: LanguageOptionsOptions, web?: EnvironmentOptions, node?: EnvironmentOptions, react?: EnvironmentOptions, tauri?: EnvironmentOptions, "vscode-extension"?: EnvironmentOptions, "cjs-override"?: ModuleOverrideOptions, "mjs-override"?: ModuleOverrideOptions}} PerConfigOptions
+ * @typedef {{"lints-js"?: LintsJsOptions, "lints-jsdoc"?: LintsJsdocOptions, languageOptions?: LanguageOptionsOptions, web?: EnvironmentOptions, node?: EnvironmentOptions, react?: EnvironmentOptions, docusaurus?: EnvironmentOptions, starlight?: EnvironmentOptions, tauri?: EnvironmentOptions, "vscode-extension"?: EnvironmentOptions, "cjs-override"?: ModuleOverrideOptions, "mjs-override"?: ModuleOverrideOptions}} PerConfigOptions
  */
 
 /**
@@ -158,7 +158,7 @@
  *
  * @typedef {object} FlatConfig
  * @property {string} [name] - Config name for debugging
- * @property {Array<string>} [files] - Glob patterns for files this config applies to
+ * @property {Array<string | string[]>} [files] - Glob patterns for files this config applies to
  * @property {Array<string>} [ignores] - Glob patterns for files to ignore
  * @property {{[pluginName: string]: object}} [plugins] - ESLint plugins
  * @property {{[ruleName: string]: RuleEntry}} [rules] - ESLint rules
@@ -167,6 +167,7 @@
  */
 
 import jsdoc from "eslint-plugin-jsdoc"
+import astro from "eslint-plugin-astro"
 import stylistic from "@stylistic/eslint-plugin"
 import globals from "globals"
 
@@ -174,7 +175,7 @@ import globals from "globals"
  * Registry of named configuration blocks.
  * Each config is a factory function that returns an ESLint flat config object.
  *
- * @type {{[K in ConfigName]: (options?: object) => FlatConfig}}
+ * @type {{[K in ConfigName]: (options?: object) => FlatConfig | Array<FlatConfig>}}
  */
 const CONFIGS = {
   /**
@@ -541,10 +542,10 @@ const CONFIGS = {
   },
 
   /**
-   * Starlight documentation site globals (browser + Astro)
+   * Starlight documentation site (browser + Astro + eslint-plugin-astro)
    *
    * @param {EnvironmentOptions} options - Configuration options
-   * @returns {FlatConfig} ESLint flat config object
+   * @returns {Array<FlatConfig>} ESLint flat config array
    */
   "starlight": (options = {}) => {
     const {
@@ -553,18 +554,20 @@ const CONFIGS = {
       additionalGlobals = {},
     } = options
 
-    return {
-      name: "gesslar/uglier/starlight",
-      files: Array.isArray(files) ? files : [files],
-      ignores: Array.isArray(ignores) ? ignores : [ignores],
-      languageOptions: {
-        globals: {
-          ...globals.browser,
-          Astro: "readonly",
-          ...additionalGlobals,
+    return [
+      ...astro.configs["flat/recommended"],
+      {
+        name: "gesslar/uglier/starlight",
+        files: Array.isArray(files) ? files : [files],
+        ignores: Array.isArray(ignores) ? ignores : [ignores],
+        languageOptions: {
+          globals: {
+            ...globals.browser,
+            ...additionalGlobals,
+          }
         }
-      }
-    }
+      },
+    ]
   },
 
   /**
@@ -625,7 +628,10 @@ export default function(options = {}) {
     const configOptions = perConfigOptions[configName] || {}
     const config = CONFIGS[configName](configOptions)
 
-    configs.push(config)
+    if(Array.isArray(config))
+      configs.push(...config)
+    else
+      configs.push(config)
   }
 
   return configs

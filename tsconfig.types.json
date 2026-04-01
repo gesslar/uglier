@@ -4,6 +4,7 @@
     "checkJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
+    "rootDir": "src",
     "declarationDir": "src/types",
     "strict": false,
     "moduleResolution": "node16",

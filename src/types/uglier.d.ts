@@ -14,7 +14,7 @@ export const availableConfigs: Array<ConfigName>;
 /**
  * Available config block names
  */
-export type ConfigName = "lints-js" | "lints-jsdoc" | "languageOptions" | "web" | "node" | "react" | "tauri" | "vscode-extension" | "cjs-override" | "mjs-override";
+export type ConfigName = "lints-js" | "lints-jsdoc" | "languageOptions" | "web" | "node" | "react" | "docusaurus" | "starlight" | "tauri" | "vscode-extension" | "cjs-override" | "mjs-override";
 /**
  * ESLint rule severity or configuration
  */
@@ -128,6 +128,8 @@ export type PerConfigOptions = {
     web?: EnvironmentOptions;
     node?: EnvironmentOptions;
     react?: EnvironmentOptions;
+    docusaurus?: EnvironmentOptions;
+    starlight?: EnvironmentOptions;
     tauri?: EnvironmentOptions;
     "vscode-extension"?: EnvironmentOptions;
     "cjs-override"?: ModuleOverrideOptions;
@@ -161,7 +163,7 @@ export type FlatConfig = {
     /**
      * - Glob patterns for files this config applies to
      */
-    files?: Array<string>;
+    files?: Array<string | string[]>;
     /**
      * - Glob patterns for files to ignore
      */
