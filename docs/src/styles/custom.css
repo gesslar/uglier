@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Quicksand:wght@300..700&family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+  --sl-font: "Quicksand", sans-serif;
+  --sl-font-mono: "Victor Mono", monospace;
+
+  --sl-color-accent-low: #5a2c0d;
+  --sl-color-accent: #c06020;
+  --sl-color-accent-high: #f0b888;
+}
+
+:root[data-theme="dark"] {
+  --sl-color-accent-low: #3d1e08;
+  --sl-color-accent: #e89860;
+  --sl-color-accent-high: #f8d8b8;
+}
