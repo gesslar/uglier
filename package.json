@@ -48,9 +48,7 @@
     "patch": "npm version patch",
     "minor": "npm version minor",
     "major": "npm version major",
-    "docs:dev": "cd docs && npm run start",
-    "docs:build": "cd docs && npm run build",
-    "docs:deploy": "gh workflow run deploy-docs.yml"
+    "docs": "gh workflow run ReleaseStarlight.yaml"
   },
   "license": "Unlicense",
   "engines": {
