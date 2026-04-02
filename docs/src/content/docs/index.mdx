@@ -1,0 +1,111 @@
+---
+title: uglier
+description: Opinionated, composable ESLint flat configs for the rest of us.
+template: splash
+hero:
+  tagline: Opinionated, composable ESLint flat configs for the rest of us.
+  actions:
+    - text: Get Started
+      link: /quick-start/intro/
+      icon: right-arrow
+      variant: primary
+    - text: Reference
+      link: /reference/api/
+      icon: open-book
+---
+
+import {Card, CardGrid, Code} from "@astrojs/starlight/components"
+
+## Config files should be short
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+<div>
+
+**Without Uglier — sprawling JSON config**
+
+```json
+// .eslintrc.json — 200+ lines of this
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["@stylistic"],
+  "rules": {
+    "semi": ["error", "never"],
+    "quotes": ["error", "double"],
+    "indent": ["error", 2],
+    "@stylistic/arrow-parens": ["error", "as-needed"],
+    "@stylistic/brace-style": ["error", "1tbs"],
+    "@stylistic/keyword-spacing": ["error", {
+      "before": true, "after": false,
+      "overrides": { "return": { "after": true } }
+    }],
+    // ... another 50 rules ...
+  }
+}
+// And you still need prettier.config.js too.
+```
+
+</div>
+<div>
+
+**With Uglier — composable, readable, done**
+
+```js
+// eslint.config.js — that's it, that's the whole file
+import uglify from "@gesslar/uglier"
+
+export default [
+  ...uglify({
+    with: [
+      "lints-js",
+      "lints-jsdoc",
+      "node",
+    ]
+  })
+]
+```
+
+</div>
+</div>
+
+## Everything you need, nothing you don't
+
+<CardGrid>
+  <Card title="Composable Blocks" icon="puzzle">
+    Mix and match from 10 config blocks. Node, React, Tauri, VSCode extensions — pick what you need, skip what you don't.
+  </Card>
+  <Card title="No Prettier Required" icon="approve-check">
+    All formatting handled by ESLint alone. No conflicting tools, no extra configs, no arguing about semicolons.
+  </Card>
+  <Card title="Flat Config Native" icon="setting">
+    Built for ESLint v9+ flat configs from the ground up. No legacy compatibility layers or .eslintrc baggage.
+  </Card>
+  <Card title="CLI Setup" icon="rocket">
+    One command to install, init, add, or remove configs. Detects your package manager automatically.
+  </Card>
+  <Card title="Fully Customizable" icon="pencil">
+    Override indent, max line length, file patterns, and individual rules per config block. Opinionated defaults, flexible escape hatches.
+  </Card>
+  <Card title="TypeScript Ready" icon="document">
+    Full TypeScript definitions generated from JSDoc. Autocomplete and type checking for all options.
+  </Card>
+</CardGrid>
+
+## Pick your path
+
+<CardGrid>
+  <Card title="Quick Start" icon="right-arrow">
+    [Install uglier and have a working ESLint config in under two minutes.](/quick-start/intro/)
+  </Card>
+  <Card title="Configs" icon="list-format">
+    [Explore each of the 10 composable config blocks and what they enforce.](/configs/lints-js/)
+  </Card>
+  <Card title="Customization" icon="pencil">
+    [Override indent, line length, file patterns, and individual rules per block.](/customization/options/)
+  </Card>
+  <Card title="Reference" icon="open-book">
+    [Complete API documentation, CLI commands, and type definitions.](/reference/api/)
+  </Card>
+  <Card title="Nerds" icon="magnifier">
+    [Read the actual source for every config block. No trust fall required.](/nerds/lints-js/)
+  </Card>
+</CardGrid>

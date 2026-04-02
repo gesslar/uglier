@@ -11,7 +11,7 @@ import {fileURLToPath} from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const srcPath = resolve(__dirname, "../../src/uglier.js")
-const outDir = resolve(__dirname, "../docs/nerds")
+const outDir = resolve(__dirname, "../src/content/docs/nerds")
 
 const source = readFileSync(srcPath, "utf-8")
 
@@ -65,12 +65,13 @@ for(const {name, code} of configs) {
   const configSlug = configSlugMap[name] || name
 
   const md = `---
-sidebar_label: "${name}"
+title: "${name}"
+slug: nerds/${name}
+sidebar:
+  order: ${order}
 ---
 
-# ${name}
-
-> [Back to config docs](/docs/configs/${configSlug})
+> [Back to config docs](/configs/${configSlug}/)
 
 Source extracted from \`src/uglier.js\`.
 
@@ -86,10 +87,11 @@ ${code}
 
 // Write the exports page
 const exportsMd = `---
-sidebar_label: "exports"
+title: "exports"
+slug: nerds/exports
+sidebar:
+  order: ${order}
 ---
-
-# exports
 
 The main export function and \`availableConfigs\`, extracted from \`src/uglier.js\`.
 
@@ -101,4 +103,4 @@ ${exportsBlock}
 writeFileSync(resolve(outDir, `${String(order).padStart(2, "0")}-exports.md`), exportsMd)
 console.log(`  wrote ${String(order).padStart(2, "0")}-exports.md`)
 
-console.log(`\nGenerated ${configs.length + 1} nerd pages in docs/nerds/`)
+console.log(`\nGenerated ${configs.length + 1} nerd pages in src/content/docs/nerds/`)
