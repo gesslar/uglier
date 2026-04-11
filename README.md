@@ -253,17 +253,17 @@ it, you good-deed profiteer.
 
 ## License
 
-uglier is released into the public domain under the
-[Unlicense](UNLICENSE.txt).
+`@gesslar/uglier` is released under the [0BSD](LICENSE.txt).
 
 This package includes or depends on third-party components under their own
 licenses:
 
 | Dependency | License |
 | --- | --- |
-| [@gesslar/colours](https://github.com/gesslar/colours) | Unlicense |
-| [@gesslar/toolkit](https://github.com/gesslar/toolkit) | Unlicense |
+| [@gesslar/colours](https://github.com/gesslar/colours) | 0BSD |
+| [@gesslar/toolkit](https://github.com/gesslar/toolkit) | 0BSD |
 | [@skarab/detect-package-manager](https://github.com/skarab42/detect-package-manager) | MIT |
 | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) | MIT |
+| [eslint-plugin-astro](https://github.com/ota-meshi/eslint-plugin-astro) | MIT |
 | [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc) | BSD-3-Clause |
 | [globals](https://github.com/sindresorhus/globals) | MIT |
