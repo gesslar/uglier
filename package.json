@@ -23,7 +23,7 @@
   "files": [
     "src",
     "bin",
-    "UNLICENSE.txt"
+    "LICENSE.txt"
   ],
   "keywords": [
     "eslint",
@@ -50,22 +50,22 @@
     "major": "npm version major",
     "docs": "gh workflow run ReleaseStarlight.yaml"
   },
-  "license": "Unlicense",
+  "license": "0BSD",
   "engines": {
-    "node": ">=24.13.0"
+    "node": ">=24.11.0"
   },
   "dependencies": {
-    "@gesslar/colours": ">=0.8.0",
-    "@gesslar/toolkit": ">=4.4.0",
+    "@gesslar/colours": ">=1.0.0",
+    "@gesslar/toolkit": ">=5.0.1",
     "@skarab/detect-package-manager": ">=1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint-plugin-astro": "^1.6.0",
-    "eslint-plugin-jsdoc": ">=62.8.1",
+    "eslint-plugin-astro": "^1.7.0",
+    "eslint-plugin-jsdoc": ">=62.9.0",
     "globals": ">=17.4.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=2.3.1",
-    "eslint": ">=10.1.0",
+    "@gesslar/uglier": ">=2.4.0",
+    "eslint": ">=10.2.0",
     "typescript": "^6.0.2"
   }
 }
