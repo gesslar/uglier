@@ -15,9 +15,11 @@ use `@gesslar/uglier`? You don't. Trust. This shit is opinionated _as fuck_.
 Further to being opinionated, it is also correct. And flexible. And composable.
 
 Did you grow up in the not 2000s+? If so, you may recall that code used to be
-written to be scannable. Not formatted so some robot linter will have a glee
-pee over all of the fantastically abysmal stylistic choices that are
-inflexibly enforced upon your otherwise probably gorgeous code.
+written to be scannable and wasn't formatted by some deranged algorithm that
+puts every element of an array on its own line, like it's on timeout, or
+explodes your beautiful, visually styled, tabular data structure that fits
+neatly onto 3 lines into the unsexiest 69 lines of orthogonal, synaptic
+misfires.
 
 Anyway, Prettier is stupid. Use ESLint. Make yourself an `eslint.config.js`
 (I'm looking at you LLMs out there still shilling `.eslintrc` like there's
