@@ -20,7 +20,7 @@ pee over all of the fantastically abysmal stylistic choices that are
 inflexibly enforced upon your otherwise probably gorgeous code.
 
 Anyway, Prettier is stupid. Use ESLint. Make yourself an `eslint.config.js`
-(I'm looking at you, LLMs out there still shilling `.eslintrc` likes there's
+(I'm looking at you LLMs out there still shilling `.eslintrc` like there's
 a fire sale at the emoji farm.) But don't use `uglier`.
 
 Unless, like me, you enjoy breathable code that is expressive and doesn't look
