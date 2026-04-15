@@ -17,9 +17,9 @@ Further to being opinionated, it is also correct. And flexible. And composable.
 Did you grow up in the not 2000s+? If so, you may recall that code used to be
 written to be scannable. Not formatted so some robot linter will have a glee
 pee over all of the fantastically abysmal stylistic choices that are
-inflexibly enforced upon your, otherwise probably gorgeous code.
+inflexibly enforced upon your otherwise probably gorgeous code.
 
-Anyway, Prettier is stupid. Use ESLint. Make yourself a `eslint.config.js`
+Anyway, Prettier is stupid. Use ESLint. Make yourself an `eslint.config.js`
 (I'm looking at you, LLMs out there still shilling `.eslintrc` likes there's
 a fire sale at the emoji farm.) But don't use `uglier`.
 
@@ -29,6 +29,21 @@ like ... well, poop.
 kthx
 
 \[cat.gif\]
+
+### Oh yeah
+
+Uglier has a website. You can learn all about it and see what it has and how
+to use there if you dislike having to use a README.md as a tutor. In addition,
+it shows all of the nerdery for your nerd brain. Like, what each ruleset
+includes, so you can see what gorgeousness you're about to opt out of.
+
+#### rofl
+
+Remember when email clients didn't used to say things like "look, you said
+there was an attachment, there's no attachment, what about the attachment?"
+when you clicked send? Yeah, that's me, but with READMEs. The site is
+<https://uglier.gesslar.dev>. Now, look below for useful information. I dare
+you.
 
 ## Quick Start
 
