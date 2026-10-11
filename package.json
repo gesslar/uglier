@@ -52,20 +52,23 @@
   },
   "license": "0BSD",
   "engines": {
-    "node": ">=24.11.0"
+    "node": ">=24.16.0"
   },
   "dependencies": {
     "@gesslar/colours": ">=1.0.0",
-    "@gesslar/toolkit": ">=5.0.1",
+    "@gesslar/toolkit": ">=5.9.1",
     "@skarab/detect-package-manager": ">=1.0.0",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint-plugin-astro": "^1.7.0",
-    "eslint-plugin-jsdoc": ">=62.9.0",
-    "globals": ">=17.4.0"
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-jsdoc": ">=65.3.0",
+    "globals": ">=17.13.0"
   },
   "devDependencies": {
-    "@gesslar/uglier": ">=2.4.0",
-    "eslint": ">=10.2.0",
-    "typescript": "^6.0.2"
+    "@gesslar/uglier": "^2.3.1",
+    "eslint": ">=10.12.0",
+    "typescript": "^7.0.2"
+  },
+  "allowScripts": {
+    "@gesslar/toolkit@5.9.1": true
   }
 }
