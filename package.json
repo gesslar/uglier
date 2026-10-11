@@ -5,7 +5,7 @@
     "name": "gesslar",
     "url": "https://gesslar.dev"
   },
-  "version": "2.4.1",
+  "version": "2.4.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gesslar/uglier.git"
@@ -52,7 +52,7 @@
   },
   "license": "0BSD",
   "engines": {
-    "node": ">=24.16.0"
+    "node": "^24.14.0 || >=26.3.0"
   },
   "dependencies": {
     "@gesslar/colours": ">=1.0.0",
@@ -66,7 +66,7 @@
   "devDependencies": {
     "@gesslar/uglier": "^2.3.1",
     "eslint": ">=10.12.0",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.2"
   },
   "allowScripts": {
     "@gesslar/toolkit@5.9.1": true
